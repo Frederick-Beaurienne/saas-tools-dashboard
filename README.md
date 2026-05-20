@@ -118,7 +118,7 @@ in order to preserve maintainability and progressive feature growth.
 # Clone Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Frederick-Beaurienne/saas-tools-dashboard
 
 cd saas-tools-dashboard
 ```
