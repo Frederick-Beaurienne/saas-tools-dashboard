@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-
-import { Shell } from './shell';
-import { Navbar } from '../navbar/navbar';
-import { Footer } from '../footer/footer';
-import { RouterOutlet } from '@angular/router';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
+import {provideRouter} from '@angular/router';
+import {Shell} from './shell';
+import {Navbar} from '../navbar/navbar';
+import {Footer} from '../footer/footer';
+import {RouterOutlet} from '@angular/router';
 
 describe('Shell', () => {
   let component: Shell;
@@ -13,6 +13,7 @@ describe('Shell', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Shell],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Shell);

@@ -1,1 +1,126 @@
-<p>navbar works!</p>
+<header class="navbar">
+
+  <div class="navbar__left">
+
+    <div class="navbar__brand">
+
+      <div class="navbar__logo">
+
+        <lucide-icon
+          [img]="Icons.Zap"
+          size="18">
+        </lucide-icon>
+
+      </div>
+
+      <div class="navbar__identity">
+        <span class="navbar__title">
+          TechCorp
+        </span>
+
+      </div>
+
+    </div>
+
+    <nav class="navbar__nav">
+
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
+        Dashboard
+      </a>
+
+      <a
+        routerLink="/tools"
+        routerLinkActive="active">
+        Tools
+      </a>
+
+      <a
+        routerLink="/analytics"
+        routerLinkActive="active">
+        Analytics
+      </a>
+
+      <a
+        class="placeholder-link"
+        title="Settings coming soon">
+        Settings
+      </a>
+
+    </nav>
+
+  </div>
+
+  <div
+    class="navbar__search placeholder"
+    title="Search coming soon">
+
+    <lucide-icon
+      [img]="Icons.Search"
+      size="16">
+    </lucide-icon>
+
+    <span>
+      Search tools...
+    </span>
+
+  </div>
+
+  <div class="navbar__actions">
+
+    <button
+      class="icon-btn icon-btn--theme"
+      [class.icon-btn--sun]="isDarkTheme()"
+      title="Theme switch coming soon"
+      (click)="toggleTheme()">
+
+      <lucide-icon
+        [img]="CurrentThemeIcon()"
+        size="18">
+      </lucide-icon>
+
+    </button>
+
+    <button
+      class="icon-btn placeholder"
+      title="Notifications coming soon"
+      disabled>
+
+      <lucide-icon
+        [img]="Icons.Bell"
+        size="18">
+      </lucide-icon>
+
+    </button>
+
+    <button
+      class="icon-btn placeholder"
+      title="Settings coming soon"
+      disabled>
+
+      <lucide-icon
+        [img]="Icons.Settings"
+        size="18">
+      </lucide-icon>
+
+    </button>
+
+    <div
+      class="navbar__profile placeholder"
+      title="Profile coming soon">
+
+      <div class="navbar__avatar">
+      </div>
+
+      <lucide-icon
+        [img]="Icons.ChevronDown"
+        size="14">
+      </lucide-icon>
+
+    </div>
+
+  </div>
+
+</header>

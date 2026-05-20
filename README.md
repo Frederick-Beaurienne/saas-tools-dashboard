@@ -17,6 +17,7 @@ Built as part of a progressive 3-day frontend technical challenge.
 - [Run the Application](#run-the-application)
 - [Routing Strategy](#routing-strategy)
 - [Current Progress](#current-progress)
+- [Testing](#testing)
 - [Design Choices](#design-choices)
 - [Future Improvements](#future-improvements)
 - [Author](#author)
@@ -69,21 +70,23 @@ The project follows a modular frontend architecture.
 
 ```text
 src/
-├── app/
-├── core/
-│   ├── layout/
-│   ├── models/
-│   └── services/
-├── pages/
-│   ├── dashboard/
-│   ├── tools/
-│   └── analytics/
-├── shared/
-│   ├── components/
-│   ├── models/
-│   ├── pipes/
-│   ├── ui/
-│   └── utils/
+└── app/
+    ├── core/
+    │   ├── layout/
+    │   ├── models/
+    │   └── services/
+    ├── pages/
+    │   ├── dashboard/
+    │   ├── tools/
+    │   └── analytics/
+    ├── shared/
+    │   ├── components/
+    │   ├── models/
+    │   ├── pipes/
+    │   ├── ui/
+    │   └── utils/
+    └── styles/
+        └── themes/
 ```
 
 ### Core Areas
@@ -96,6 +99,9 @@ src/
 
 - `shared`
   Reusable UI components, utilities and helpers.
+
+- `styles/themes`
+  Global theme token architecture for dark/light mode management.
 
 The architecture intentionally separates:
 
@@ -118,7 +124,7 @@ in order to preserve maintainability and progressive feature growth.
 # Clone Repository
 
 ```bash
-git clone https://github.com/Frederick-Beaurienne/saas-tools-dashboard
+git clone https://github.com/Frederick-Beaurienne/saas-tools-dashboard.git
 
 cd saas-tools-dashboard
 ```
@@ -167,13 +173,18 @@ The application is designed around three primary routes:
  /analytics
 ```
 
+The routing strategy follows a page-oriented structure built around Angular Router.
+
 Navigation consistency is considered a core requirement of the challenge.
 
-The routing structure is intentionally page-oriented in order to:
+This routing approach was chosen to:
 
 - preserve navigation clarity
 - support progressive feature delivery
 - simplify layout composition
+- prepare reusable shell-based layouts
+
+The routing layer is intentionally connected early in the project lifecycle in order to validate navigation behavior and layout composition before business features are implemented.
 
 ---
 
@@ -186,15 +197,59 @@ The routing structure is intentionally page-oriented in order to:
 - SCSS integration
 - Development environment setup
 - Dependency installation
-- Project architecture definition
+- Modular project architecture
+- Shell layout foundation
+- Router integration
+- Navigation structure
+- Initial component testing
 - Build and tooling validation
+- Navigation smoke testing
+- Dark/light theme architecture
+- Theme switching implementation
+- Design token system
+- Lucide icon centralization
+- Navbar visual integration
+- Mockup-aligned navigation UI
+- Theme-aware UI structure
 
 ## In Progress
 
-- Layout shell
-- Shared navigation
-- Dashboard foundation
+- Dashboard implementation
+- Shared UI primitives
 - Design system construction
+
+---
+
+# Testing
+
+Run test suite:
+
+```bash
+npm test
+```
+
+Current testing scope includes:
+
+- App composition validation
+- Shell layout validation
+- Navigation composition tests
+- Component rendering verification
+- Smoke testing for foundational components
+- Theme switching validation
+- Navigation rendering tests
+- Layout composition verification
+
+The testing strategy follows a progressive validation approach.
+
+Tests are intentionally introduced alongside stabilized components rather than postponed to the end of development.
+
+This approach aims to:
+
+- validate component contracts
+- preserve navigation integrity
+- reduce regression risk
+- support iterative delivery
+- align testing with project progression
 
 ---
 
@@ -254,11 +309,31 @@ The footer component is intentionally present from project initialization, even 
 
 ---
 
+## Theme Token Strategy
+
+The application intentionally separates structural styling from theme values through centralized SCSS design tokens.
+
+Dark and light themes are implemented early in the project lifecycle in order to:
+
+- validate theme scalability
+- avoid late-stage refactoring
+- preserve component reusability
+- centralize visual configuration
+- prepare future user theme preferences
+
+Component styles intentionally avoid hardcoded business colors whenever possible.
+
+Theme switching currently relies on body-level CSS classes combined with SCSS variable overrides.
+
+This approach preserves simplicity while remaining scalable for future evolution.
+
+---
+
 ## Shared Design System Strategy
 
 The challenge progressively removes visual guidance after Dashboard implementation.
 
-The project therefore intentionally builds its design system from Day 6 onward.
+The project therefore intentionally builds its design system throughout the progressive challenge phases.
 
 This strategy aims to:
 
@@ -310,7 +385,7 @@ Planned areas include:
 - User settings area
 - Data services integration
 - State management evaluation
-- Unit testing strategy
+- Advanced testing coverage
 - Accessibility refinements
 - Micro-interactions and animations
 - Performance optimization
