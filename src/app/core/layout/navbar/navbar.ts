@@ -1,32 +1,33 @@
-import {Component} from '@angular/core';
-import {
-  RouterLink,
-  RouterLinkActive
-} from '@angular/router';
-import {computed, signal} from '@angular/core';
-import {AppIcons} from '../../../shared/ui/icons';
-import {
-  LucideAngularModule
-} from 'lucide-angular';
+import { Component, computed, signal } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { LucideAngularModule } from 'lucide-angular';
+
+import { AppIcons } from '../../../shared/ui/icons';
 
 @Component({
   selector: 'app-navbar',
+  standalone: true,
   imports: [
     RouterLink,
     RouterLinkActive,
-    LucideAngularModule
+    LucideAngularModule,
   ],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.scss'
+  styleUrl: './navbar.scss',
 })
 export class Navbar {
+
   protected readonly Icons = AppIcons;
 
-  protected readonly CurrentThemeIcon = computed(() =>
-    this.isDarkTheme() ? this.Icons.Sun : this.Icons.Moon
-  );
-
   public isDarkTheme = signal(true);
+
+  public isMobileMenuOpen = signal(false);
+
+  protected readonly CurrentThemeIcon = computed(() =>
+    this.isDarkTheme()
+      ? this.Icons.Sun
+      : this.Icons.Moon
+  );
 
   public toggleTheme(): void {
 
@@ -41,5 +42,17 @@ export class Navbar {
       'light',
       !this.isDarkTheme()
     );
+  }
+
+  public toggleMobileMenu(): void {
+
+    this.isMobileMenuOpen.update(
+      value => !value
+    );
+  }
+
+  public closeMobileMenu(): void {
+
+    this.isMobileMenuOpen.set(false);
   }
 }

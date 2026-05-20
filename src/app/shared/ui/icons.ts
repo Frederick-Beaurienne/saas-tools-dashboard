@@ -5,6 +5,7 @@ import {
   Settings,
   Sun,
   Moon,
+  Menu,
   Zap
 } from 'lucide-angular';
 
@@ -15,5 +16,6 @@ export const AppIcons = {
   Settings,
   Sun,
   Moon,
+  Menu,
   Zap,
 };
