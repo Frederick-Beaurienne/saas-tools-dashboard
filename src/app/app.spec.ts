@@ -1,5 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
+import { Shell } from './core/layout/shell/shell';
+import { By } from '@angular/platform-browser';
 
 describe('App', () => {
   beforeEach(async () => {
@@ -14,10 +16,11 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('should render shell component', () => {
     const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, saas-tools-dashboard');
+    fixture.detectChanges();
+
+    const shell = fixture.debugElement.query(By.directive(Shell));
+    expect(shell).toBeTruthy();
   });
 });
