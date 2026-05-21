@@ -50,6 +50,17 @@ export class ToolModal {
     'Communication'
   ];
 
+  readonly statuses = [
+    'active',
+    'unused',
+    'expiring'
+  ];
+
+  readonly iconPreview =
+    signal<string | null>(
+      null
+    );
+
   readonly Icons = AppIcons
 
   tool = input<any>();
@@ -121,8 +132,26 @@ export class ToolModal {
       ]
     ],
 
+    icon_url: [
+      '',
+      [
+        Validators.pattern(
+          /^(https?:\/\/.+)?$/i
+        )
+      ]
+    ],
+
     description: [''],
-    status: ['active']
+    status: [
+      'active',
+      [
+        Validators.required
+      ]
+    ],
+
+    active_users_count: [null],
+
+    updated_at: [''],
 
   });
 
@@ -142,6 +171,9 @@ export class ToolModal {
 
       if (tool) {
         this.form.patchValue(tool);
+        this.iconPreview.set(
+          tool?.icon_url ?? null
+        );
       } else {
         this.form.reset({
           status: 'active'
@@ -182,6 +214,37 @@ export class ToolModal {
 
     this.deleteConfirmation.set(false);
     this.closed.emit();
+
+  }
+
+  getStatusClasses(status: string): string {
+
+    switch (status?.toLowerCase()) {
+
+      case 'active':
+        return 'bg-emerald-500/100 text-white';
+
+      case 'unused':
+        return 'bg-amber-500/100 text-white';
+
+      case 'expiring':
+        return 'bg-rose-500/100 text-white';
+
+      default:
+        return 'bg-[var(--surface-hover)] text-white/80';
+    }
+  }
+
+  updateIconPreview(): void {
+
+    const value =
+      this.form.value.icon_url;
+
+    this.iconPreview.set(
+      value?.trim()
+        ? value
+        : null
+    );
 
   }
 
@@ -237,6 +300,8 @@ export class ToolModal {
 
   submit(): void {
 
+    this.updateIconPreview();
+
     if (this.form.invalid) {
 
       this.form.markAllAsTouched();
@@ -255,6 +320,7 @@ export class ToolModal {
       owner_department: raw.owner_department ?? undefined,
       monthly_cost: raw.monthly_cost ?? undefined,
       website_url: raw.website_url ?? undefined,
+      icon_url: raw.icon_url ?? undefined,
       description: raw.description ?? undefined,
       status: raw.status as Tool['status'] ?? undefined
 

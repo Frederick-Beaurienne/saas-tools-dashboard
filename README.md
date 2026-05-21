@@ -50,6 +50,9 @@ Implemented features:
 - Multi-field search workflow
 - Tools table responsive scrolling
 - Shared scrollbar UI system
+- Tool status management
+- Icon URL management with commit-based preview
+- Extended tool details modal
 
 Challenge progression:
 
@@ -239,6 +242,11 @@ This routing approach was chosen to:
 - Shared scrollbar system
 - Cross-page search navigation
 - Tools page implementation
+- Extended tools data presentation
+- Status management workflow
+- Tool icon management
+- Modal detail expansion
+- Commit-based icon preview UX
 
 ## In Progress
 
@@ -388,8 +396,12 @@ Rather than implementing isolated page-specific dialogs, the project introduces 
 - edit mode
 - create mode
 - safe delete confirmation
+- status management
+- extended tool metadata display
+- icon management and preview
 
-The parent component controls available modes and opening behavior while API interactions remain encapsulated inside the modal.
+
+The parent component controls available modes and opening behavior while tool integrity rules, preview behavior and API interactions remain encapsulated inside the modal.
 
 This approach was chosen to:
 
@@ -408,6 +420,10 @@ The tools workflow introduces progressive form integrity validation.
 Reactive form validation is combined with explicit user feedback in order to preserve both data integrity and user experience.
 
 Validation rules are enforced at the application layer while remaining visible to the user through contextual validation messages.
+
+URL integrity validation is applied to both website and icon resources.
+
+Preview interactions intentionally follow a commit-based strategy (blur or submit) rather than live keystroke rendering in order to reduce UI noise and avoid unnecessary asset loading.
 
 This approach was chosen to:
 
@@ -451,11 +467,32 @@ rather than partially implemented features or premature complexity.
 
 ---
 
+## Mock Backend Timestamp Strategy
+
+The dashboard currently exposes a "Last 30 days" recent-tools filter as a planned interaction.
+
+A dedicated service strategy (`getRecentTools30d`) was prepared but intentionally remains disabled.
+
+The provided mock JSON backend does not automatically maintain `created_at` and `updated_at` timestamps during persistence operations.
+
+Rather than injecting timestamps from the frontend, timestamp ownership was intentionally preserved as a backend responsibility.
+
+This decision was made to:
+
+- preserve data integrity
+- avoid client-side timestamp injection
+- maintain clear ownership of persistence metadata
+- keep frontend behavior aligned with production-oriented architecture principles
+
+Until backend timestamp persistence becomes reliable, the dashboard currently relies on sorted recent items rather than true time-window filtering.
+
+---
+
 # Future Improvements
 
 Planned areas include:
 
-- Advanced filtering
+- Advanced tools filtering
 - Pagination and sorting
 - Bulk tool operations
 - Loading and skeleton states

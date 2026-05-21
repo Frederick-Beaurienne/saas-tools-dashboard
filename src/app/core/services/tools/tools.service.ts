@@ -24,6 +24,28 @@ export class ToolsService {
     );
   }
 
+  getRecentTools30d() {
+
+    const now =
+      new Date();
+
+    const last30Days =
+      new Date(
+        now.setDate(
+          now.getDate() - 30
+        )
+      )
+        .toISOString();
+
+    return this.http.get<Tool[]>(
+      `${environment.apiUrl}${ApiEndpoints.tools}` +
+      `?_sort=updated_at` +
+      `&_order=desc` +
+      `&updated_at_gte=${last30Days}`
+    );
+
+  }
+
   getTools(search?: string): Observable<Tool[]> {
 
     if (search?.trim()) {

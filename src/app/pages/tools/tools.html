@@ -71,7 +71,7 @@
 
       <table
         class="table-ui
-           min-w-[920px]
+           min-w-[1080px]
            w-full">
 
         <thead>
@@ -84,6 +84,10 @@
 
           <th class="w-[18%]">
             Vendor
+          </th>
+
+          <th class="w-[14%]">
+            Category
           </th>
 
           <th class="w-[18%]">
@@ -100,6 +104,10 @@
 
           <th class="w-[12%]">
             Status
+          </th>
+
+          <th class="w-[14%]">
+            Last Update
           </th>
 
         </tr>
@@ -181,6 +189,14 @@
               <td class="text-secondary">
                 {{
                   displayValue(
+                    tool.category
+                  )
+                }}
+              </td>
+
+              <td class="text-secondary">
+                {{
+                  displayValue(
                     tool.owner_department
                   )
                 }}
@@ -237,6 +253,23 @@
                     —
 
                   </span>
+
+                }
+
+              </td>
+
+              <td class="text-secondary">
+
+                @if (tool.updated_at) {
+
+                  {{
+                    tool.updated_at
+                      | date:'dd/MM/yy'
+                  }}
+
+                } @else {
+
+                  —
 
                 }
 

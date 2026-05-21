@@ -12,6 +12,7 @@ import {ToolsService} from '../../core/services/tools/tools.service';
 import {ToolModal} from '../../shared/components/tool-modal/tool-modal';
 import {AppIcons} from '../../shared/ui/icons';
 import {ActivatedRoute} from '@angular/router';
+import {DatePipe} from '@angular/common';
 
 
 @Component({
@@ -19,7 +20,8 @@ import {ActivatedRoute} from '@angular/router';
   standalone: true,
   imports: [
     LucideAngularModule,
-    ToolModal
+    ToolModal,
+    DatePipe
   ],
   templateUrl: './tools.html'
 })

@@ -247,7 +247,9 @@ body {
 }
 
 /* ICON BTN */
-
+.border-ui{
+ border-color: var(--border-color);
+}
 
 .icon-btn {
   display: flex;
