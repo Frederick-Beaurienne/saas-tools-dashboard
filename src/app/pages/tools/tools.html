@@ -1,1 +1,283 @@
-<p>tools works!</p>
+<!-- HERO -->
+
+<section class="space-y-2">
+
+  <h1
+    class="text-4xl font-bold
+           tracking-tight text-primary">
+
+    Tools Catalogue
+
+  </h1>
+
+  <p
+    class="max-w-2xl
+           text-base text-secondary">
+
+    Browse and manage your organization's software tools
+
+  </p>
+
+</section>
+
+<!-- CATALOGUE -->
+
+<section class="mt-8">
+
+  <div
+    class="card p-6
+         flex flex-col
+         max-h-[calc(100vh-287px)]
+         lg:max-h-[calc(100vh-225px)]">
+
+    <!-- HEADER -->
+
+    <div
+      class="flex items-start
+             justify-between gap-4">
+
+      <h2
+        class="text-xl font-semibold
+               tracking-tight text-primary">
+
+        All Tools
+
+      </h2>
+
+      <button
+        class="btn-primary flex
+               items-center gap-2"
+        (click)="createTool()">
+
+        <lucide-icon
+          [img]="AppIcons.Plus"
+          size="16">
+        </lucide-icon>
+
+        New
+
+      </button>
+
+    </div>
+
+    <!-- TABLE -->
+
+    <div
+      class="mt-6
+       flex-1
+       overflow-auto
+       rounded-2xl
+       scrollbar-ui">
+
+      <table
+        class="table-ui
+           min-w-[920px]
+           w-full">
+
+        <thead>
+
+        <tr>
+
+          <th class="w-[18%]">
+            Tool
+          </th>
+
+          <th class="w-[18%]">
+            Vendor
+          </th>
+
+          <th class="w-[18%]">
+            Department
+          </th>
+
+          <th class="w-[10%]">
+            Users
+          </th>
+
+          <th class="w-[14%]">
+            Monthly Cost
+          </th>
+
+          <th class="w-[12%]">
+            Status
+          </th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+          @for (tool of tools();
+            track tool.id) {
+
+            <tr
+              (click)="openTool(tool)"
+              class="cursor-pointer">
+
+              <td>
+
+                <div
+                  class="flex items-center gap-3">
+
+                  <div
+                    class="flex h-9 w-9
+                           shrink-0
+                           items-center
+                           justify-center
+                           rounded-lg">
+
+                    @if (!tool.icon_invalid) {
+
+                      <img
+                        [src]="tool.icon_url"
+                        [alt]="tool.name"
+                        class="h-5 w-5
+                               object-contain"
+                        (error)="
+                          onImageError(
+                            $event,
+                            tool
+                          )
+                        ">
+
+                    } @else {
+
+                      <lucide-icon
+                        [img]="AppIcons.CircleHelp"
+                        size="25"
+                        class="text-secondary">
+                      </lucide-icon>
+
+                    }
+
+                  </div>
+
+                  <span
+                    class="block truncate
+                           font-medium
+                           text-primary">
+
+                    {{
+                      displayValue(
+                        tool.name
+                      )
+                    }}
+
+                  </span>
+
+                </div>
+
+              </td>
+
+              <td class="text-secondary">
+                {{
+                  displayValue(
+                    tool.vendor
+                  )
+                }}
+              </td>
+
+              <td class="text-secondary">
+                {{
+                  displayValue(
+                    tool.owner_department
+                  )
+                }}
+              </td>
+
+              <td class="text-secondary">
+                {{
+                  displayValue(
+                    tool.active_users_count
+                  )
+                }}
+              </td>
+
+              <td class="text-secondary">
+
+                @if (tool.monthly_cost) {
+
+                  €{{ tool.monthly_cost }}
+
+                } @else {
+
+                  —
+
+                }
+
+              </td>
+
+              <td>
+
+                @if (tool.status) {
+
+                  <span
+                    class="inline-flex
+                           rounded-lg
+                           px-2.5 py-1
+                           text-xs
+                           font-medium
+                           capitalize"
+                    [class]="
+                      getStatusClasses(
+                        tool.status
+                      )
+                    ">
+
+                    {{ tool.status }}
+
+                  </span>
+
+                } @else {
+
+                  <span
+                    class="text-secondary">
+
+                    —
+
+                  </span>
+
+                }
+
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- MODAL -->
+
+@if (isModalOpen()) {
+
+  <app-tool-modal
+    [tool]="selectedTool()"
+    [defaultMode]="
+      isCreateMode()
+        ? 'create'
+        : 'view'
+    "
+    [availableModes]="
+      isCreateMode()
+        ? ['create']
+        : [
+            'view',
+            'edit',
+            'delete'
+          ]
+    "
+    (closed)="closeModal()"
+    (changed)="requestRefresh()">
+  </app-tool-modal>
+
+}

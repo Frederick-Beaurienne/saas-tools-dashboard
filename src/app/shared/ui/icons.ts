@@ -17,7 +17,8 @@ import {
   Users,
   Wrench,
   X,
-  Zap
+  Zap,
+  Plus
 } from 'lucide-angular';
 
 export const AppIcons = {
@@ -39,5 +40,6 @@ export const AppIcons = {
   Users,
   Wrench,
   X,
-  Zap
+  Zap,
+  Plus
 };

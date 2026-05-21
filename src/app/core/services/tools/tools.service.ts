@@ -1,11 +1,15 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 import {environment} from '../../../../environments/environment';
 import {ApiEndpoints} from '../../config/api-endpoints';
 
 import {Tool} from '../../../shared/models/tool.model';
-import {of} from 'rxjs';
+import {Observable, forkJoin} from 'rxjs';
+
+import {
+  map
+} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +22,23 @@ export class ToolsService {
     return this.http.get<Tool[]>(
       `${environment.apiUrl}${ApiEndpoints.tools}?_sort=updated_at&_order=desc&_limit=8`
     );
+  }
+
+  getTools(search?: string): Observable<Tool[]> {
+
+    if (search?.trim()) {
+
+      return this
+        .buildSearchRequest(
+          search.trim()
+        );
+
+    }
+
+    return this.http.get<Tool[]>(
+      `${environment.apiUrl}${ApiEndpoints.tools}`
+    );
+
   }
 
   getTool(
@@ -50,17 +71,117 @@ export class ToolsService {
   deleteTool(
     id: number
   ) {
-    // TODO: Re-enable DELETE request once API persistence is validated.
+    return this.http.delete<void>(
+      `${environment.apiUrl}${ApiEndpoints.tools}/${id}`
+    );
+  }
 
-    // return this.http.delete<void>(
-    //   `${environment.apiUrl}${ApiEndpoints.tools}/${id}`
-    // );
+  // ---------- PRIVATE METHODS ---------- //
 
-    console.log(
-      '[TEMP DELETE MOCK OF id:'+id+']',
-      id
+  private buildSearchRequest(
+    term: string
+  ): Observable<Tool[]> {
+
+    const url =
+      `${environment.apiUrl}${ApiEndpoints.tools}`;
+
+    return forkJoin({
+
+      byName:
+        this.http.get<Tool[]>(
+          url,
+          {
+            params:
+              new HttpParams()
+                .set(
+                  'name_like',
+                  term
+                )
+          }
+        ),
+
+      byVendor:
+        this.http.get<Tool[]>(
+          url,
+          {
+            params:
+              new HttpParams()
+                .set(
+                  'vendor_like',
+                  term
+                )
+          }
+        ),
+
+      byCategory:
+        this.http.get<Tool[]>(
+          url,
+          {
+            params:
+              new HttpParams()
+                .set(
+                  'category_like',
+                  term
+                )
+          }
+        ),
+
+      byDepartment:
+        this.http.get<Tool[]>(
+          url,
+          {
+            params:
+              new HttpParams()
+                .set(
+                  'owner_department_like',
+                  term
+                )
+          }
+        ),
+
+      byStatus:
+        this.http.get<Tool[]>(
+          url,
+          {
+            params:
+              new HttpParams()
+                .set(
+                  'status_like',
+                  term
+                )
+          }
+        )
+
+    }).pipe(
+
+      map(results => {
+
+        const merged =
+          [
+            ...results.byName,
+            ...results.byVendor,
+            ...results.byCategory,
+            ...results.byDepartment,
+            ...results.byStatus
+          ];
+
+        return merged.filter(
+          (
+            tool,
+            index,
+            self
+          ) =>
+            index ===
+            self.findIndex(
+              t =>
+                t.id ===
+                tool.id
+            )
+        );
+
+      })
+
     );
 
-    return of(void 0);
   }
 }

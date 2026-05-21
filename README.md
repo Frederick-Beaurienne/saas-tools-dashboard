@@ -45,11 +45,16 @@ Implemented features:
 - Theme-aware reusable components
 - API-driven dashboard data
 - Progressive component architecture
+- Tools catalog page
+- Global cross-page search
+- Multi-field search workflow
+- Tools table responsive scrolling
+- Shared scrollbar UI system
 
 Challenge progression:
 
 - Day 6 — Dashboard foundation
-- Day 7 — Tools management (in progress)
+- Day 7 — Tools management (core workflow implemented)
 - Day 8 — Analytics integration (planned)
 
 ---
@@ -181,7 +186,7 @@ The routing layer is intentionally introduced early in the project lifecycle.
 Current navigation includes:
 
 - Dashboard
-- Tools (foundation route)
+- Tools
 - Analytics (foundation route)
 
 This approach validates navigation behavior and layout composition before full feature implementation while preserving navigation consistency across progressive challenge phases.
@@ -226,11 +231,18 @@ This routing approach was chosen to:
 - Dashboard modal integration
 - Safe delete workflow
 - Modal UX and responsive refinement
+- Tools catalog implementation
+- Global navbar search integration
+- Query-param driven search routing
+- Multi-field search service
+- Responsive tools data table
+- Shared scrollbar system
+- Cross-page search navigation
+- Tools page implementation
 
 ## In Progress
 
 - Shared UI system expansion
-- Tools page implementation
 - API persistence hardening
 - Analytics page implementation
 - Testing expansion
@@ -444,7 +456,8 @@ rather than partially implemented features or premature complexity.
 Planned areas include:
 
 - Advanced filtering
-- Search interactions
+- Pagination and sorting
+- Bulk tool operations
 - Loading and skeleton states
 - Error-state UX refinement
 - User settings area

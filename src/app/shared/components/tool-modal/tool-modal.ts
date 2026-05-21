@@ -46,7 +46,8 @@ export class ToolModal {
     'HR',
     'Finance',
     'Operations',
-    'Design'
+    'Design',
+    'Communication'
   ];
 
   readonly Icons = AppIcons
@@ -95,7 +96,7 @@ export class ToolModal {
       [
         Validators.required,
         Validators.pattern(
-          /^(Engineering|Sales|Marketing|HR|Finance|Operations|Design)$/
+          /^(Engineering|Sales|Marketing|HR|Finance|Operations|Design|Communication)$/
         )
       ]
     ],

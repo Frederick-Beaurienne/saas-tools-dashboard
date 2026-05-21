@@ -91,6 +91,18 @@ body {
   padding: 1rem 1.5rem;
 }
 
+.table-ui thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  background: var(--bg-card);
+}
+
+.table-ui thead th {
+  background: inherit;
+}
+
 /* MODAL */
 .modal-header {
   margin: -1.5rem -1.5rem 1.5rem;
@@ -145,9 +157,11 @@ body {
   );
 }
 
-/* MODAL SCROLLBAR */
+/* SCROLLBAR UI */
 
+.scrollbar-ui,
 .tool-modal__card {
+
   scrollbar-width: thin;
 
   scrollbar-color:
@@ -155,15 +169,22 @@ body {
     transparent;
 }
 
+.scrollbar-ui::-webkit-scrollbar,
 .tool-modal__card::-webkit-scrollbar {
+
   width: 12px;
+  height: 12px;
 }
 
+.scrollbar-ui::-webkit-scrollbar-track,
 .tool-modal__card::-webkit-scrollbar-track {
+
   background: transparent;
 }
 
+.scrollbar-ui::-webkit-scrollbar-thumb,
 .tool-modal__card::-webkit-scrollbar-thumb {
+
   background:
     var(--text-secondary);
 
@@ -181,9 +202,33 @@ body {
     background-color .2s ease;
 }
 
+.scrollbar-ui::-webkit-scrollbar-thumb:hover,
 .tool-modal__card::-webkit-scrollbar-thumb:hover {
+
   background:
     var(--text-primary);
+}
+
+/* arrows */
+
+.scrollbar-ui::-webkit-scrollbar-button,
+.tool-modal__card::-webkit-scrollbar-button {
+
+  background:
+    transparent;
+
+  height:
+    12px;
+
+  width:
+    12px;
+}
+
+.scrollbar-ui::-webkit-scrollbar-button:hover,
+.tool-modal__card::-webkit-scrollbar-button:hover {
+
+  background:
+    transparent;
 }
 
 /* arrows */

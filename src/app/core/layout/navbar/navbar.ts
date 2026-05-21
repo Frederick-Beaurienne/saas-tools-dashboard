@@ -1,8 +1,12 @@
-import { Component, computed, signal } from '@angular/core';
+import {Component, computed, inject, signal} from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 
 import { AppIcons } from '../../../shared/ui/icons';
+import {
+  Router
+} from '@angular/router';
+
 
 @Component({
   selector: 'app-navbar',
@@ -17,16 +21,16 @@ import { AppIcons } from '../../../shared/ui/icons';
 })
 export class Navbar {
 
+  private readonly router = inject(Router);
+  public searchQuery = signal('');
+
   protected readonly Icons = AppIcons;
 
   public isDarkTheme = signal(true);
-
   public isMobileMenuOpen = signal(false);
 
   protected readonly CurrentThemeIcon = computed(() =>
-    this.isDarkTheme()
-      ? this.Icons.Sun
-      : this.Icons.Moon
+    this.isDarkTheme() ? this.Icons.Sun : this.Icons.Moon
   );
 
   public toggleTheme(): void {
@@ -54,5 +58,23 @@ export class Navbar {
   public closeMobileMenu(): void {
 
     this.isMobileMenuOpen.set(false);
+  }
+
+  public submitSearch(): void {
+
+    const query =
+      this.searchQuery()
+        .trim();
+
+    this.closeMobileMenu();
+
+    this.router.navigate(
+      ['/tools'],
+      {
+        queryParams: {
+          search: query
+        }
+      }
+    );
   }
 }
