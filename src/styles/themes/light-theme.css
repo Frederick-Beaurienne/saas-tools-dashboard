@@ -2,6 +2,8 @@
   --bg-primary: #F9FAFB;
   --bg-surface: #FEFEFE;
 
+  --bg-card: #FEFEFE;
+
   --border-color: rgba(15, 23, 42, 0.08);
 
   --text-primary: #111827;
@@ -22,4 +24,8 @@
   --avatar-bg:#EAEAEA;
 
   --text-inverse: #FEFEFE;
+
+  --card-shadow:
+    0 1px 2px rgb(15 23 42 / 0.05),
+    0 8px 24px rgb(15 23 42 / 0.06);
 }

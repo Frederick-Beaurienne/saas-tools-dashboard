@@ -1,0 +1,81 @@
+@import "tailwindcss";
+@import './styles/themes/dark-theme.css';
+@import './styles/themes/light-theme.css';
+
+body {
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.dark {
+  background-image:
+    linear-gradient(
+      var(--grid-color) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      var(--grid-color) 1px,
+      transparent 1px
+    );
+
+  background-size: 48px 48px;
+}
+
+.light{
+  background-image: none;
+}
+
+.card {
+  border-radius: 1rem;
+
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-card);
+
+  box-shadow: var(--card-shadow);
+
+  transition:
+    box-shadow .2s ease,
+    border-color .2s ease,
+    transform .2s ease;
+}
+
+/* TABLE */
+
+.table-ui {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-ui thead tr {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table-ui tbody td {
+  border-top: 1px solid var(--grid-color);
+}
+
+.table-ui tbody tr:first-child td {
+  border-top: none;
+}
+
+.table-ui tbody tr:hover {
+  background-color: var(--surface-hover);
+}
+
+.table-ui th {
+  padding: 1rem 1.5rem;
+  text-align: left;
+}
+
+.table-ui td {
+  padding: 1rem 1.5rem;
+}

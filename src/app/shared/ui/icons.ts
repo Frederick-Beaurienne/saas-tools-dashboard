@@ -6,7 +6,12 @@ import {
   Sun,
   Moon,
   Menu,
-  Zap
+  Zap,
+  TrendingUp,
+  Wrench,
+  Building2,
+  Users,
+  CircleHelp
 } from 'lucide-angular';
 
 export const AppIcons = {
@@ -18,4 +23,9 @@ export const AppIcons = {
   Moon,
   Menu,
   Zap,
+  TrendingUp,
+  Wrench,
+  Building2,
+  Users,
+  CircleHelp
 };

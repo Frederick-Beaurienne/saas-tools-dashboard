@@ -26,24 +26,25 @@ Built as part of a progressive 3-day frontend technical challenge.
 
 # Features
 
-Current and planned application scope:
+Implemented features:
 
-- Dashboard overview
-- Internal tools catalog
-- KPI visualization
-- Analytics and reporting
+- Dashboard page
+- KPI analytics cards
+- Recent tools dashboard table
 - Responsive SaaS dashboard UI
+- Dark / light theme switching
 - Shared design system
 - Cross-page navigation
-- Progressive feature delivery
-- Reusable component architecture
-- Chart-based analytics integration
+- Lucide icon integration
+- Theme-aware reusable components
+- API-driven dashboard data
+- Progressive component architecture
 
-The project follows the progressive structure defined by the challenge:
+Challenge progression:
 
-- Dashboard foundation
-- Tools management
-- Analytics integration
+- Day 6 — Dashboard foundation
+- Day 7 — Tools management (planned)
+- Day 8 — Analytics integration (planned)
 
 ---
 
@@ -52,6 +53,7 @@ The project follows the progressive structure defined by the challenge:
 | Technology | Usage |
 |---|---|
 | Angular 21 | Frontend framework |
+| Angular HttpClient | API communication |
 | TypeScript | Application language |
 | Angular Router | Navigation |
 | Tailwind CSS v4 | Utility-first styling |
@@ -167,15 +169,15 @@ npm run build
 
 The application is designed around three primary routes:
 
-```text
-/
- /tools
- /analytics
-```
+The routing layer is intentionally introduced early in the project lifecycle.
 
-The routing strategy follows a page-oriented structure built around Angular Router.
+Current navigation includes:
 
-Navigation consistency is considered a core requirement of the challenge.
+- Dashboard
+- Tools (foundation route)
+- Analytics (foundation route)
+
+This approach validates navigation behavior and layout composition before full feature implementation while preserving navigation consistency across progressive challenge phases.
 
 This routing approach was chosen to:
 
@@ -184,8 +186,6 @@ This routing approach was chosen to:
 - simplify layout composition
 - prepare reusable shell-based layouts
 
-The routing layer is intentionally connected early in the project lifecycle in order to validate navigation behavior and layout composition before business features are implemented.
-
 ---
 
 # Current Progress
@@ -193,30 +193,32 @@ The routing layer is intentionally connected early in the project lifecycle in o
 ## Completed
 
 - Angular project initialization
-- Tailwind integration
-- SCSS integration
-- Development environment setup
-- Dependency installation
+- Tailwind + SCSS integration
 - Modular project architecture
-- Shell layout foundation
-- Router integration
-- Navigation structure
-- Initial component testing
-- Build and tooling validation
-- Navigation smoke testing
-- Dark/light theme architecture
-- Theme switching implementation
-- Design token system
-- Lucide icon centralization
-- Navbar visual integration
-- Mockup-aligned navigation UI
-- Theme-aware UI structure
+- Router and shell layout
+- Navbar implementation
+- Dark/light theme system
+- Theme switching
+- Shared design token architecture
+- Lucide icon system
+- Dashboard page implementation
+- KPI card component system
+- Analytics API integration
+- Recent tools API integration
+- Responsive dashboard layout
+- Recent tools table
+- Status badge system
+- Theme-aware reusable UI components
+- Mockup-aligned dashboard implementation
+- Responsive implementation and validation
+- Build validation and smoke testing
 
 ## In Progress
 
-- Dashboard implementation
-- Shared UI primitives
-- Design system construction
+- Shared UI system expansion
+- Tools page implementation
+- Analytics page implementation
+- Testing expansion
 
 ---
 
@@ -228,16 +230,19 @@ Run test suite:
 npm test
 ```
 
-Current testing scope includes:
+Current validation includes:
 
-- App composition validation
-- Shell layout validation
-- Navigation composition tests
-- Component rendering verification
-- Smoke testing for foundational components
+- Build verification
+- Navigation validation
 - Theme switching validation
-- Navigation rendering tests
-- Layout composition verification
+- Component rendering validation
+- Responsive verification
+- Manual dashboard integration testing
+- API integration smoke testing
+
+Given the challenge timeframe, testing currently prioritizes integration confidence and UI validation.
+
+Expanded automated testing coverage remains planned as the application stabilizes.
 
 The testing strategy follows a progressive validation approach.
 
@@ -313,17 +318,17 @@ The footer component is intentionally present from project initialization, even 
 
 The application intentionally separates structural styling from theme values through centralized SCSS design tokens.
 
-Dark and light themes are implemented early in the project lifecycle in order to:
+Dark and light themes are fully implemented through body-level theme classes and centralized SCSS token overrides.
+
+Theme switching is intentionally integrated early in the project lifecycle in order to:
 
 - validate theme scalability
 - avoid late-stage refactoring
 - preserve component reusability
 - centralize visual configuration
-- prepare future user theme preferences
+- prepare future user preferences
 
 Component styles intentionally avoid hardcoded business colors whenever possible.
-
-Theme switching currently relies on body-level CSS classes combined with SCSS variable overrides.
 
 This approach preserves simplicity while remaining scalable for future evolution.
 
@@ -382,8 +387,9 @@ Planned areas include:
 
 - Advanced filtering
 - Search interactions
+- Loading and skeleton states
+- Error-state UX refinement
 - User settings area
-- Data services integration
 - State management evaluation
 - Advanced testing coverage
 - Accessibility refinements

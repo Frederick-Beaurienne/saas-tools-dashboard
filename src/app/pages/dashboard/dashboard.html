@@ -1,1 +1,51 @@
-<p>dashboard works!</p>
+<section class="space-y-2">
+
+  <h1
+    class="text-4xl font-bold tracking-tight text-primary">
+
+    Internal Tools Dashboard
+
+  </h1>
+
+  <p
+    class="max-w-2xl text-base text-secondary">
+
+    Monitor and manage your organization's software tools and expenses
+
+  </p>
+
+</section>
+
+<!-- KPI section -->
+<section
+  class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+
+  @for (kpi of kpis; track kpi.title) {
+
+    <app-dashboard-kpi-card
+      [title]="kpi.title"
+      [value]="kpi.value"
+      [secondaryValue]="kpi.secondaryValue"
+      [trend]="kpi.trend"
+      [icon]="kpi.icon"
+      [accentFrom]="kpi.accentFrom"
+      [accentTo]="kpi.accentTo">
+    </app-dashboard-kpi-card>
+
+  }
+
+</section>
+
+<!-- Main content -->
+<section
+  class="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-12">
+
+  <!-- Recent tools -->
+  <div
+    class="xl:col-span-12">
+
+    <app-dashboard-recent-tools
+      [tools]="recentTools" />
+  </div>
+
+</section>
