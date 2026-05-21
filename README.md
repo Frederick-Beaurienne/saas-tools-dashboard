@@ -31,6 +31,12 @@ Implemented features:
 - Dashboard page
 - KPI analytics cards
 - Recent tools dashboard table
+- Tool details / edit modal
+- Tool creation workflow
+- Safe delete workflow
+- Form validation and UX feedback
+- Theme-aware form system
+- Reusable modal architecture
 - Responsive SaaS dashboard UI
 - Dark / light theme switching
 - Shared design system
@@ -43,7 +49,7 @@ Implemented features:
 Challenge progression:
 
 - Day 6 — Dashboard foundation
-- Day 7 — Tools management (planned)
+- Day 7 — Tools management (in progress)
 - Day 8 — Analytics integration (planned)
 
 ---
@@ -54,6 +60,7 @@ Challenge progression:
 |---|---|
 | Angular 21 | Frontend framework |
 | Angular HttpClient | API communication |
+| ng-select | Angular select component |
 | TypeScript | Application language |
 | Angular Router | Navigation |
 | Tailwind CSS v4 | Utility-first styling |
@@ -212,11 +219,19 @@ This routing approach was chosen to:
 - Mockup-aligned dashboard implementation
 - Responsive implementation and validation
 - Build validation and smoke testing
+- Reusable tool modal system
+- View / edit / create modal states
+- Reactive form validation
+- ng-select integration
+- Dashboard modal integration
+- Safe delete workflow
+- Modal UX and responsive refinement
 
 ## In Progress
 
 - Shared UI system expansion
 - Tools page implementation
+- API persistence hardening
 - Analytics page implementation
 - Testing expansion
 
@@ -348,6 +363,49 @@ This strategy aims to:
 - maintain coherent UX across pages
 
 Shared UI components will progressively become the primary styling layer.
+
+---
+
+## Reusable Modal Strategy
+
+The tools workflow introduced a reusable modal architecture.
+
+Rather than implementing isolated page-specific dialogs, the project introduces a configurable modal component supporting:
+
+- detail mode
+- edit mode
+- create mode
+- safe delete confirmation
+
+The parent component controls available modes and opening behavior while API interactions remain encapsulated inside the modal.
+
+This approach was chosen to:
+
+- reduce duplicated CRUD logic
+- centralize interaction workflows
+- preserve component reusability
+- support future tool-management features
+- maintain UX consistency
+
+---
+
+## Form Validation Strategy
+
+The tools workflow introduces progressive form integrity validation.
+
+Reactive form validation is combined with explicit user feedback in order to preserve both data integrity and user experience.
+
+Validation rules are enforced at the application layer while remaining visible to the user through contextual validation messages.
+
+This approach was chosen to:
+
+- preserve input integrity
+- prevent invalid submissions
+- provide explicit user guidance
+- reduce interaction ambiguity
+- support predictable CRUD workflows
+
+Validation logic is intentionally enforced both at UI level and at TypeScript submission level to preserve defensive application behavior.
 
 ---
 

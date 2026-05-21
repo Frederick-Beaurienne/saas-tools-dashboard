@@ -1,0 +1,473 @@
+<div
+  class="tool-modal__overlay fixed
+         top-[120px] lg:top-[72px]
+         left-0 right-0 bottom-0
+         z-50
+         flex items-start justify-center
+         overflow-hidden
+         bg-black/50 backdrop-blur-sm
+         p-4">
+
+  <div
+    class="tool-modal__card
+         card w-full max-w-3xl
+         mx-auto
+         max-h-[calc(100vh-150px)]
+         lg:max-h-[calc(100vh-102px)]
+         overflow-y-auto
+         rounded-3xl p-6">
+
+    <!-- Header -->
+    <div
+      class="modal-header flex items-center justify-between">
+
+      <div>
+
+        <h2 class="text-xl font-semibold text-primary">
+
+          @if (currentMode() === 'create') {
+            Add Tool
+          } @else if (currentMode() === 'edit') {
+            Edit Tool
+          } @else {
+            Tool Details
+          }
+
+        </h2>
+
+      </div>
+
+      <div class="flex items-center">
+
+        <div class="modal-header__actions">
+          @if (currentMode() === 'view'
+          && availableModes().includes('edit')) {
+
+            <button
+              class="icon-btn"
+              title="Edit tool"
+              (click)="setMode('edit')">
+
+              <lucide-icon
+                [img]="Icons.Pencil"
+                size="18">
+              </lucide-icon>
+
+            </button>
+
+          }
+
+          @if (currentMode() === 'view'
+          && availableModes().includes('delete')) {
+
+            <button
+              class="icon-btn"
+              [class.hover:!text-orange-400]="!deleteConfirmation()"
+              title="Delete tool"
+              (click)="
+                deleteConfirmation()
+                  ? confirmDelete()
+                  : toggleDeleteConfirmation()
+              "
+              (mouseleave)="deleteConfirmation.set(false)">
+
+              @if (deleteConfirmation()) {
+
+                <lucide-icon
+                  [img]="Icons.AlertTriangle"
+                  size="18"
+                  class="!text-red-500">
+                </lucide-icon>
+
+              } @else {
+
+                <lucide-icon
+                  [img]="Icons.Trash2"
+                  size="18">
+                </lucide-icon>
+
+              }
+
+            </button>
+
+          }
+
+        </div>
+
+        <button
+          class="modal-header__close"
+          title="Close modal"
+          (click)="close()">
+
+          <lucide-icon
+            [img]="Icons.X"
+            size="18">
+          </lucide-icon>
+
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- Body -->
+    <!-- Body -->
+
+    @if (currentMode() === 'view') {
+
+      <div
+        class="grid grid-cols-1 md:grid-cols-2
+           gap-x-8 gap-y-6">
+
+        <div>
+
+          <label
+            class="mb-1 block text-xs font-medium
+               tracking-wide text-secondary">
+            Name
+          </label>
+
+          <p class="text-primary">
+            {{ form.value.name || '—' }}
+          </p>
+
+        </div>
+
+        <div>
+
+          <label
+            class="mb-1 block text-xs font-medium
+               tracking-wide text-secondary">
+            Vendor
+          </label>
+
+          <p class="text-primary">
+            {{ form.value.vendor || '—' }}
+          </p>
+
+        </div>
+
+        <div>
+
+          <label
+            class="mb-1 block text-xs font-medium
+               tracking-wide text-secondary">
+            Category
+          </label>
+
+          <p class="text-primary">
+            {{ form.value.category || '—' }}
+          </p>
+
+        </div>
+
+        <div>
+
+          <label
+            class="mb-1 block text-xs font-medium
+               tracking-wide text-secondary">
+            Department
+          </label>
+
+          <p class="text-primary">
+            {{ form.value.owner_department || '—' }}
+          </p>
+
+        </div>
+
+        <div>
+
+          <label
+            class="mb-1 block text-xs font-medium
+               tracking-wide text-secondary">
+            Monthly Cost
+          </label>
+
+          <p class="text-primary">
+            @if (form.value.monthly_cost) {
+              €{{ form.value.monthly_cost }}
+            } @else {
+              —
+            }
+          </p>
+
+        </div>
+
+        <div>
+
+          <label
+            class="mb-1 block text-xs font-medium
+               tracking-wide text-secondary">
+            Website
+          </label>
+
+          <a
+            [href]="form.value.website_url"
+            target="_blank"
+            rel="noopener"
+            class="text-primary underline-offset-2
+               hover:underline">
+
+            {{ form.value.website_url || '—' }}
+
+          </a>
+
+        </div>
+
+        <div class="md:col-span-2 mt-2">
+
+          <label
+            class="mb-1 block text-xs font-medium
+               tracking-wide text-secondary">
+            Description
+          </label>
+
+          <p
+            class="text-primary whitespace-pre-wrap">
+            {{ form.value.description || '—' }}
+          </p>
+
+        </div>
+
+      </div>
+
+    } @else {
+
+      <form
+        [formGroup]="form"
+        class="grid grid-cols-1 md:grid-cols-2
+           gap-x-8 gap-y-5">
+
+        <div>
+
+          <label
+            class="mb-2 block text-xs font-medium
+               tracking-wide text-secondary">
+            Name
+          </label>
+
+          <input
+            class="input-ui"
+            [class.!border-red-500]="isInvalid('name')"
+            formControlName="name">
+
+          @if (isInvalid('name')) {
+
+            <p
+              class="mt-1 text-xs text-red-400">
+
+              @if (form.controls.name.errors?.['required']) {
+                Name is required
+              }
+
+              @if (form.controls.name.errors?.['minlength']) {
+                Minimum 2 characters
+              }
+
+              @if (form.controls.name.errors?.['maxlength']) {
+                Maximum 100 characters
+              }
+
+            </p>
+
+          }
+        </div>
+
+        <div>
+
+          <label
+            class="mb-2 block text-xs font-medium
+               tracking-wide text-secondary">
+            Vendor
+          </label>
+
+          <input
+            class="input-ui"
+            [class.!border-red-500]="isInvalid('vendor')"
+            formControlName="vendor">
+
+          @if (isInvalid('vendor')) {
+
+            <p
+              class="mt-1 text-xs text-red-400">
+
+              @if (form.controls.vendor.errors?.['required']) {
+                Vendor is required
+              }
+
+              @if (form.controls.vendor.errors?.['maxlength']) {
+                Maximum 100 characters
+              }
+
+            </p>
+
+          }
+        </div>
+
+        <div>
+
+          <label
+            class="mb-2 block text-xs font-medium
+               tracking-wide text-secondary">
+            Category
+          </label>
+
+          <input
+            class="input-ui"
+            [class.!border-red-500]="isInvalid('category')"
+            formControlName="category">
+
+        </div>
+
+        <div>
+
+          <label
+            class="mb-2 block text-xs font-medium
+               tracking-wide text-secondary">
+            Department
+          </label>
+
+          <div>
+
+            <ng-select
+              class="ng-select-ui"
+              formControlName="owner_department"
+              [items]="departments"
+              placeholder="Select department"
+              [clearable]="false">
+            </ng-select>
+
+            @if (
+              isInvalid('owner_department')
+              ) {
+
+              <p
+                class="mt-1 text-xs text-red-400">
+
+                Invalid department
+
+              </p>
+
+            }
+
+          </div>
+        </div>
+
+        <div>
+
+          <label
+            class="mb-2 block text-xs font-medium
+               tracking-wide text-secondary">
+            Monthly Cost
+          </label>
+
+          <input
+            class="input-ui"
+            [class.!border-red-500]="isInvalid('monthly_cost')"
+            formControlName="monthly_cost">
+
+          @if (isInvalid('monthly_cost')) {
+
+            <p
+              class="mt-1 text-xs text-red-400">
+
+              @if (form.controls.monthly_cost.errors?.['required']) {
+                Cost is required
+              }
+
+              @if (form.controls.monthly_cost.errors?.['min']) {
+                Must be positive
+              }
+
+              @if (form.controls.monthly_cost.errors?.['pattern']) {
+                Max 2 decimals
+              }
+
+            </p>
+
+          }
+        </div>
+
+        <div>
+
+          <label
+            class="mb-2 block text-xs font-medium
+               tracking-wide text-secondary">
+            Website
+          </label>
+
+          <input
+            class="input-ui"
+            [class.!border-red-500]="isInvalid('website_url')"
+            formControlName="website_url">
+
+          @if (isInvalid('website_url')) {
+
+            <p
+              class="mt-1 text-xs text-red-400">
+
+              Invalid URL format
+
+            </p>
+
+          }
+        </div>
+
+        <div class="md:col-span-2">
+
+          <label
+            class="mb-2 block text-xs font-medium
+               tracking-wide text-secondary">
+            Description
+          </label>
+
+          <textarea
+            class="input-ui min-h-[120px]"
+            formControlName="description">
+      </textarea>
+
+        </div>
+
+      </form>
+
+    }
+
+    <!-- Footer -->
+    <div
+      class="flex justify-end gap-3 mt-6">
+
+      @if (currentMode() === 'edit'
+      || currentMode() === 'create') {
+
+        <button
+          class="btn-secondary"
+          (click)="cancel()">
+
+          Cancel
+
+        </button>
+
+        <button
+          class="btn-primary"
+          [title]="
+            form.invalid
+              ? 'Please fix validation errors'
+              : ''
+          "
+          (click)="submit()">
+
+          @if (currentMode() === 'create') {
+            Create
+          } @else {
+            Save
+          }
+
+        </button>
+
+      }
+
+    </div>
+
+  </div>
+
+</div>

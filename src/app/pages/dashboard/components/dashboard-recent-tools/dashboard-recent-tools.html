@@ -10,8 +10,10 @@
 
     <button
       class="flex items-center gap-2 rounded-xl
-           px-3 py-2 text-sm text-secondary
-           transition-colors hover:bg-[var(--surface-hover)]">
+            px-3 py-2 text-sm text-secondary placeholder"
+      title="filter coming soon">
+      <!-- transition-colors hover:bg-[var(&#45;&#45;surface-hover)] -->
+
 
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -79,8 +81,10 @@
 
         @for (tool of tools(); track tool.id) {
 
-          <tr>
-
+          <tr
+            (click)="openTool(tool)"
+            class="cursor-pointer transition-colors
+                   hover:bg-[var(--surface-hover)]">
             <td class="px-6 py-4">
 
               <div class="flex items-center gap-3">
@@ -160,3 +164,20 @@
   </div>
 
 </section>
+
+<!-- MODAL -->
+@if (isModalOpen()) {
+
+  <app-tool-modal
+    [tool]="selectedTool()"
+    [defaultMode]="'view'"
+    [availableModes]="[
+      'view',
+      'edit',
+      'delete'
+    ]"
+    (closed)="closeModal()"
+    (changed)="requestRefresh()">
+  </app-tool-modal>
+
+}

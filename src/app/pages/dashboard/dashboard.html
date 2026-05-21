@@ -45,7 +45,8 @@
     class="xl:col-span-12">
 
     <app-dashboard-recent-tools
-      [tools]="recentTools" />
+      [tools]="recentTools"
+      (refreshRequested)="loadRecentTools()"/>
   </div>
 
 </section>

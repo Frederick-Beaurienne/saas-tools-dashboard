@@ -34,6 +34,14 @@ export class Dashboard implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadAnalytics();
+    this.loadRecentTools();
+  }
+
+
+  // ---------- LOADING ---------- //
+  loadAnalytics(): void {
+
     this.analyticsService
       .getDashboardAnalytics()
       .pipe(take(1))
@@ -67,7 +75,7 @@ export class Dashboard implements OnInit {
             accentTo: '#ec4899',
           },
           {
-            title: 'Cost per User',
+            title: 'Cost/User',
             value: `€${response.cost_analytics.cost_per_user}`,
             trend: response.kpi_trends.cost_per_user_change,
             icon: AppIcons.Users,
@@ -79,13 +87,16 @@ export class Dashboard implements OnInit {
         this.cdr.detectChanges();
       });
 
+  }
+
+  loadRecentTools(): void {
+
     this.toolsService.getRecentTools()
       .pipe(take(1))
       .subscribe(response => {
 
         this.recentTools = response;
         this.cdr.detectChanges();
-        console.log(this.recentTools);
 
       });
   }

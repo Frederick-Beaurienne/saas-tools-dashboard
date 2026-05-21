@@ -1,17 +1,26 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output, signal} from '@angular/core';
 import {input} from '@angular/core';
 import {Tool} from '../../../../shared/models/tool.model';
 import {AppIcons} from '../../../../shared/ui/icons';
 import {LucideAngularModule} from 'lucide-angular';
+import {ToolModal} from '../../../../shared/components/tool-modal/tool-modal';
 
 @Component({
   selector: 'app-dashboard-recent-tools',
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule,
+    ToolModal],
   templateUrl: './dashboard-recent-tools.html',
   styleUrl: './dashboard-recent-tools.scss',
 })
 export class DashboardRecentTools {
+
+  @Output()
+  refreshRequested = new EventEmitter<void>();
+
   tools = input.required<Tool[]>();
+
+  selectedTool = signal<any | null>(null);
+  isModalOpen = signal(false);
 
   protected readonly AppIcons = AppIcons;
 
@@ -55,5 +64,25 @@ export class DashboardRecentTools {
     }
 
     return String(value);
+  }
+
+  openTool(tool: any): void {
+
+    this.selectedTool.set(tool);
+    this.isModalOpen.set(true);
+
+  }
+
+  closeModal(): void {
+
+    this.isModalOpen.set(false);
+    this.selectedTool.set(null);
+
+  }
+
+  requestRefresh(): void {
+
+    this.refreshRequested.emit();
+
   }
 }

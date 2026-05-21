@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "@ng-select/ng-select/themes/default.theme.css";
 @import './styles/themes/dark-theme.css';
 @import './styles/themes/light-theme.css';
 
@@ -16,21 +17,20 @@ body {
 }
 
 .dark {
-  background-image:
-    linear-gradient(
-      var(--grid-color) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      var(--grid-color) 1px,
-      transparent 1px
-    );
+  background-image: linear-gradient(
+    var(--grid-color) 1px,
+    transparent 1px
+  ),
+  linear-gradient(
+    90deg,
+    var(--grid-color) 1px,
+    transparent 1px
+  );
 
   background-size: 48px 48px;
 }
 
-.light{
+.light {
   background-image: none;
 }
 
@@ -42,11 +42,22 @@ body {
 
   box-shadow: var(--card-shadow);
 
-  transition:
-    box-shadow .2s ease,
-    border-color .2s ease,
-    transform .2s ease;
+  transition: box-shadow .2s ease,
+  border-color .2s ease,
+  transform .2s ease;
 }
+
+.placeholder {
+  cursor: not-allowed;
+  opacity: .7;
+  pointer-events: auto;
+}
+
+.placeholder:hover {
+  background: transparent !important;
+  color: var(--text-secondary) !important;
+}
+
 
 /* TABLE */
 
@@ -78,4 +89,335 @@ body {
 
 .table-ui td {
   padding: 1rem 1.5rem;
+}
+
+/* MODAL */
+.modal-header {
+  margin: -1.5rem -1.5rem 1.5rem;
+
+  padding: 1.5rem;
+
+  border-bottom: 1px solid color-mix(
+    in srgb,
+    var(--border-color) 35%,
+    transparent
+  );
+
+  background: color-mix(
+    in srgb,
+    var(--bg-card) 88%,
+    white 4%
+  );
+}
+
+.modal-header__actions {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.modal-header__close {
+  margin-left: .5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2.25rem;
+  height: 2.25rem;
+
+  border-radius: .85rem;
+  border: 1px solid var(--border-color);
+
+  background: var(--surface-soft);
+
+  transition: background-color .2s ease,
+  border-color .2s ease,
+  transform .2s ease;
+}
+
+.modal-header__close:hover {
+  background: var(--surface-hover);
+  border-color: color-mix(
+    in srgb,
+    var(--border-color) 70%,
+    white 10%
+  );
+}
+
+/* MODAL SCROLLBAR */
+
+.tool-modal__card {
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    var(--text-secondary)
+    transparent;
+}
+
+.tool-modal__card::-webkit-scrollbar {
+  width: 12px;
+}
+
+.tool-modal__card::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tool-modal__card::-webkit-scrollbar-thumb {
+  background:
+    var(--text-secondary);
+
+  border-radius:
+    999px;
+
+  border:
+    2px solid
+    transparent;
+
+  min-height:
+    48px;
+
+  transition:
+    background-color .2s ease;
+}
+
+.tool-modal__card::-webkit-scrollbar-thumb:hover {
+  background:
+    var(--text-primary);
+}
+
+/* arrows */
+
+.tool-modal__card::-webkit-scrollbar-button {
+  background:
+    transparent;
+
+  height:
+    12px;
+}
+
+.tool-modal__card::-webkit-scrollbar-button:hover {
+  background:
+    transparent;
+}
+
+/* ICON BTN */
+
+
+.icon-btn {
+  display: flex;
+  width: 32px;
+  height: 32px;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-secondary);
+
+  transition: background-color .2s ease,
+  color .2s ease;
+}
+
+.icon-btn:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+/* BUTTONS */
+
+.btn-primary,
+.btn-secondary {
+  padding: .5rem .9rem;
+  border-radius: .85rem;
+  color: var(--text-secondary);
+
+  transition: background-color .2s ease,
+  color .2s ease;
+}
+
+.btn-primary:hover:not(:disabled),
+.btn-secondary:hover:not(:disabled) {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.btn-primary:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+/* INPUT */
+.input-ui {
+  width: 100%;
+
+  border: 1px solid var(--border-color);
+  border-radius: .9rem;
+
+  background: var(--surface-soft);
+  color: var(--text-primary);
+
+  padding: .75rem 1rem;
+
+  transition: border-color .2s ease,
+  background-color .2s ease,
+  box-shadow .2s ease;
+}
+
+.input-ui:hover {
+  background: var(--surface-hover);
+}
+
+.input-ui:focus {
+  outline: none;
+  border-color: color-mix(
+    in srgb,
+    var(--border-color) 70%,
+    white 12%
+  );
+
+  background: var(--surface-hover);
+
+  box-shadow: 0 0 0 3px color-mix(
+    in srgb,
+    var(--surface-hover) 75%,
+    transparent
+  );
+}
+
+/* NG SELECT */
+
+.ng-select.ng-select-ui .ng-select-container {
+  min-height: 50px;
+
+  border: 1px solid var(--border-color) !important;
+  border-radius: .9rem !important;
+
+  background: var(--surface-soft) !important;
+  color: var(--text-primary) !important;
+
+  transition:
+    border-color .2s ease,
+    background-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.ng-select.ng-select-ui .ng-select-container:hover {
+  background: var(--surface-hover) !important;
+}
+
+.ng-select.ng-select-ui.ng-select-focused
+.ng-select-container {
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--border-color) 70%,
+      white 12%
+    ) !important;
+
+  background:
+    var(--surface-hover) !important;
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--surface-hover) 75%,
+      transparent
+    ) !important;
+}
+
+/* OPENED SELECT */
+
+.ng-select.ng-select-ui.ng-select-opened
+.ng-select-container {
+
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+
+  border-bottom-color:
+    transparent !important;
+}
+
+/* text + placeholder */
+
+.ng-select-ui .ng-value,
+.ng-select-ui .ng-placeholder {
+  color: var(--text-primary) !important;
+}
+
+.ng-select-ui .ng-placeholder {
+  color: var(--text-secondary) !important;
+}
+
+/* arrow */
+
+.ng-select-ui .ng-arrow {
+  border-color:
+    var(--text-secondary)
+    transparent
+    transparent !important;
+}
+
+/* dropdown */
+
+.ng-dropdown-panel {
+
+  margin-top: 0 !important;
+
+  border:
+    1px solid var(--border-color)
+  !important;
+
+  border-top:
+    none !important;
+
+  border-radius:
+    0 0 .9rem .9rem
+  !important;
+
+  background:
+    var(--bg-card)
+  !important;
+
+  box-shadow:
+    var(--card-shadow)
+  !important;
+
+  overflow:
+    hidden;
+}
+
+.ng-dropdown-panel
+.ng-dropdown-panel-items
+.ng-option {
+
+  background:
+    var(--bg-card) !important;
+
+  color:
+    var(--text-primary) !important;
+}
+
+.ng-dropdown-panel
+.ng-option.ng-option-marked {
+
+  background:
+    var(--surface-hover) !important;
+
+  color:
+    var(--text-primary) !important;
+}
+
+.ng-dropdown-panel
+.ng-option.ng-option-selected {
+
+  background:
+    color-mix(
+      in srgb,
+      var(--surface-hover) 75%,
+      transparent
+    ) !important;
 }
