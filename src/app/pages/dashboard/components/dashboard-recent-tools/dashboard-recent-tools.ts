@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Output, signal} from '@angular/core';
 import {input} from '@angular/core';
-import {Tool} from '../../../../shared/models/tool.model';
+import {Tool} from '../../../../core/models/tool.model';
 import {AppIcons} from '../../../../shared/ui/icons';
 import {LucideAngularModule} from 'lucide-angular';
 import {ToolModal} from '../../../../shared/components/tool-modal/tool-modal';

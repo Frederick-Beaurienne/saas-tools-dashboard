@@ -8,7 +8,7 @@ import {
 import {environment} from '../../../../environments/environment';
 import {ApiEndpoints} from '../../config/api-endpoints';
 
-import {Tool} from '../../../shared/models/tool.model';
+import {Tool} from '../../models/tool.model';
 import {Observable} from 'rxjs';
 
 import {map} from 'rxjs/operators';
@@ -60,6 +60,39 @@ export class ToolsService {
       `&updated_at_gte=${last30Days}`
     );
 
+  }
+
+  getActiveTools() {
+
+    return this.http.get<Tool[]>(
+      `${environment.apiUrl}${ApiEndpoints.tools}` +
+      `?status=active`
+    );
+
+  }
+
+  getExpiringTools() {
+
+    return this.http.get<Tool[]>(
+      `${environment.apiUrl}${ApiEndpoints.tools}` +
+      `?status=expiring`
+    );
+
+  }
+
+  getUnusedTools() {
+
+    return this.http.get<Tool[]>(
+      `${environment.apiUrl}${ApiEndpoints.tools}` +
+      `?status=unused`
+    );
+
+  }
+
+  getAllTools() {
+    return this.http.get<Tool[]>(
+      `${environment.apiUrl}${ApiEndpoints.tools}`
+    );
   }
 
   getTools(

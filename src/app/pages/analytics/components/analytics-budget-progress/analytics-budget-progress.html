@@ -1,0 +1,126 @@
+<section
+  class="card
+         p-5
+         h-[360px]
+         flex
+         flex-col">
+
+  @if (budgetData()) {
+
+    <div
+      class="flex flex-1
+               min-h-0
+               items-start
+               justify-between">
+
+      <div>
+
+        <p
+          class="mt-2
+                 text-sm
+                 text-secondary">
+
+          Budget Progress
+
+        </p>
+
+        <p
+          class="mt-10
+                 text-3xl
+                 font-bold
+                 tracking-tight
+                 text-primary">
+
+          {{ displayValue() }}
+
+          <span
+            class="text-secondary">
+
+            {{ secondaryValue() }}
+
+          </span>
+
+        </p>
+
+      </div>
+
+      <div
+        class="flex
+               h-9 w-9
+               items-center
+               justify-center
+               rounded-xl"
+        [ngStyle]="{
+          background:
+            'linear-gradient(135deg,#14b8a6 0%,#2dd4bf 100%)'
+        }">
+
+        <lucide-icon
+          [img]="icon"
+          size="16">
+        </lucide-icon>
+
+      </div>
+
+    </div>
+
+    <div class="mt-5">
+
+      <div
+        class="mb-2
+           flex
+           items-center
+           justify-between
+           text-xs
+           text-secondary">
+
+        <span>
+          Budget usage
+        </span>
+
+        <span>
+          {{ budgetData()!.utilization }}%
+        </span>
+
+      </div>
+
+      <div
+        class="h-2
+           overflow-hidden
+           rounded-full
+           bg-white/5">
+
+        <div
+          class="h-full
+             rounded-full
+             transition-all
+             duration-500"
+          [style.width.%]="
+        budgetData()!.utilization
+      "
+          [ngStyle]="{
+        background:
+          'linear-gradient(90deg,#14b8a6 0%,#2dd4bf 100%)'
+      }">
+        </div>
+
+      </div>
+
+    </div>
+
+  } @else {
+
+    <div
+      class="flex
+             min-h-[180px]
+             items-center
+             justify-center
+             text-secondary">
+
+      Loading...
+
+    </div>
+
+  }
+
+</section>

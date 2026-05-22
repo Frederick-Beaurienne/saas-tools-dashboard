@@ -1,0 +1,88 @@
+<section
+  class="card
+         p-5
+         h-auto
+         flex
+         flex-col">
+
+  <h2
+    class="text-lg
+           font-semibold
+           text-primary">
+
+    Usage Patterns
+
+  </h2>
+
+  <p
+    class="mt-1
+           mb-3
+           text-sm
+           text-secondary">
+
+    Frequency distribution overview
+
+  </p>
+
+  <div
+    class="space-y-3">
+
+    @for (
+      pattern
+        of patterns();
+      track pattern.label
+      ) {
+
+      <div>
+
+        <div
+          class="mb-1
+                 flex
+                 items-center
+                 justify-between
+                 text-xs">
+
+          <span
+            class="text-secondary">
+
+            {{ pattern.label }}
+
+          </span>
+
+          <span
+            class="text-primary">
+
+            {{ pattern.value }}
+
+          </span>
+
+        </div>
+
+        <div
+          class="h-2
+                 rounded-full"
+          [style.background]="
+            'var(--surface-soft)'
+          ">
+
+          <div
+            class="h-full
+                   rounded-full"
+            [style.width.%]="
+              barWidth(
+                pattern.value
+              )
+            "
+            [style.background]="
+              'linear-gradient( 90deg, var(--accent-primary), var(--accent-secondary) )'">
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+</section>

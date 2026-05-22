@@ -1,0 +1,110 @@
+<section
+  class="card
+         p-5
+         h-auto
+         flex
+         flex-col">
+
+  <h2
+    class="text-lg
+           font-semibold
+           text-primary">
+
+    ROI Calculations
+
+  </h2>
+
+  <p
+    class="mt-1
+           mb-4
+           text-sm
+           text-secondary">
+
+    Optimization impact overview
+
+  </p>
+
+  <div
+    class="grid
+           grid-cols-2
+           gap-3">
+
+    <!-- SAVINGS -->
+
+    <div
+      class="rounded-lg
+             border
+             p-3"
+      [style.border-color]="'var(--border-color)'"
+      [style.background]="'var(--surface-soft)'">
+
+      <p
+        class="text-xs
+               text-secondary">
+
+        Potential Savings
+
+      </p>
+
+      <p
+        class="mt-1
+               text-xl
+               font-semibold
+               text-primary">
+
+        € {{ potentialSavings() }}
+
+      </p>
+
+      <p
+        class="mt-1
+               text-xs
+               text-secondary">
+
+        Monthly optimization potential
+
+      </p>
+
+    </div>
+
+    <!-- LICENSES -->
+
+    <div
+      class="rounded-lg
+             border
+             p-3"
+      [style.border-color]="'var(--border-color)'"
+      [style.background]="'var(--surface-soft)'">
+
+      <p
+        class="text-xs
+               text-secondary">
+
+        Impacted Licenses
+
+      </p>
+
+      <p
+        class="mt-1
+               text-xl
+               font-semibold
+               text-primary">
+
+        {{ impactedLicenses() }}
+
+      </p>
+
+      <p
+        class="mt-1
+               text-xs
+               text-secondary">
+
+        Assigned unused licenses
+
+      </p>
+
+    </div>
+
+  </div>
+
+</section>

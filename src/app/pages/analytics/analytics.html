@@ -1,1 +1,206 @@
-<p>analytics works!</p>
+<!-- HERO -->
+
+<section class="space-y-2">
+
+  <h1
+    class="text-4xl
+           font-bold
+           tracking-tight
+           text-primary">
+
+    Analytics
+
+  </h1>
+
+  <p
+    class="max-w-2xl
+           text-base
+           text-secondary">
+
+    Track spending, adoption and SaaS performance.
+
+  </p>
+
+</section>
+
+<!-- COST ANALYTICS -->
+
+<section class="mt-8 space-y-4">
+
+  <h2
+    class="text-xl
+           font-semibold
+           tracking-tight
+           text-primary">
+
+    Cost Analytics
+
+  </h2>
+
+  <div
+    class="grid
+           grid-cols-1
+           lg:grid-cols-2
+           gap-6">
+
+    <app-analytics-spend-evolution
+      [analyticsData]="analyticsData()">
+    </app-analytics-spend-evolution>
+
+    <app-analytics-department-cost-breakdown
+      [toolsData]="activeToolsData()">
+    </app-analytics-department-cost-breakdown>
+
+    <app-analytics-budget-progress
+      [analyticsData]="analyticsData()">
+    </app-analytics-budget-progress>
+
+    <app-analytics-top-expensive-tools
+      [activeToolsData]="activeToolsData()"
+      [expiringToolsData]="expiringToolsData()"
+      [unusedToolsData]="unusedToolsData()">
+    </app-analytics-top-expensive-tools>
+
+  </div>
+
+</section>
+
+<!-- USAGE ANALYTICS -->
+
+<section class="mt-8 space-y-4">
+
+  <h2
+    class="text-xl
+           font-semibold
+           tracking-tight
+           text-primary">
+
+    Usage Analytics
+
+  </h2>
+
+  <!-- Global controls -->
+
+  <div
+    class="flex
+           flex-wrap
+           items-center
+           justify-between
+           gap-4">
+
+    <!--    <div-->
+    <!--      class="flex-->
+    <!--             items-center-->
+    <!--             gap-2">-->
+
+    <!--      <button class="btn-filter active">-->
+    <!--        30d-->
+    <!--      </button>-->
+
+    <!--      <button class="btn-filter">-->
+    <!--        90d-->
+    <!--      </button>-->
+
+    <!--      <button class="btn-filter">-->
+    <!--        1y-->
+    <!--      </button>-->
+
+    <!--    </div>-->
+
+    <!--    <div-->
+    <!--      class="text-sm-->
+    <!--             text-secondary">-->
+
+    <!--      Department drill-down & filters-->
+
+    <!--    </div>-->
+
+  </div>
+
+  <div
+    class="grid
+           grid-cols-1
+           lg:grid-cols-2
+           gap-6">
+
+    <app-analytics-user-adoption-rates
+      [activeToolsData]="activeToolsData()"
+      [expiringToolsData]="expiringToolsData()"
+      [unusedToolsData]="unusedToolsData()"
+      [userToolsData]="userToolsData()">
+    </app-analytics-user-adoption-rates>
+
+    <app-analytics-most-least-used-tools
+      [activeToolsData]="activeToolsData()"
+      [expiringToolsData]="expiringToolsData()"
+      [unusedToolsData]="unusedToolsData()"
+      [userToolsData]="userToolsData()">
+    </app-analytics-most-least-used-tools>
+
+    <app-analytics-department-activity
+      [activeToolsData]="activeToolsData()"
+      [expiringToolsData]="expiringToolsData()"
+      [unusedToolsData]="unusedToolsData()"
+      [userToolsData]="userToolsData()">
+    </app-analytics-department-activity>
+
+    <app-analytics-growth-trends
+      [activeToolsData]="activeToolsData()"
+      [expiringToolsData]="expiringToolsData()"
+      [unusedToolsData]="unusedToolsData()">
+    </app-analytics-growth-trends>
+
+  </div>
+
+</section>
+
+<!-- INSIGHTS DASHBOARD -->
+
+<section class="mt-8 space-y-4">
+
+  <h2
+    class="text-xl
+           font-semibold
+           tracking-tight
+           text-primary">
+
+    Insights Dashboard
+
+  </h2>
+
+  <div
+    class="grid
+           grid-cols-1
+           sm:grid-cols-2
+           xl:grid-cols-4
+           gap-6">
+
+    <!-- COST OPTIMIZATION -->
+
+    <app-analytics-cost-optimization-alerts
+      [activeToolsData]="activeToolsData()"
+      [expiringToolsData]="expiringToolsData()"
+      [unusedToolsData]="unusedToolsData()">
+    </app-analytics-cost-optimization-alerts>
+
+    <!-- UNUSED TOOLS -->
+
+    <app-analytics-unused-tools-warnings
+      [unusedToolsData]="unusedToolsData()">
+    </app-analytics-unused-tools-warnings>
+
+    <!-- ROI -->
+
+    <app-analytics-roi-calculations
+      [unusedToolsData]="unusedToolsData()">
+    </app-analytics-roi-calculations>
+
+    <!-- USAGE PATTERNS -->
+
+    <app-analytics-usage-patterns
+      [userToolsData]="userToolsData()">
+    </app-analytics-usage-patterns>
+
+  </div>
+
+</section>

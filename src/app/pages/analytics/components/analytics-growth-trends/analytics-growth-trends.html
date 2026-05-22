@@ -1,0 +1,56 @@
+<section
+  class="card
+         p-5
+         h-[360px]
+         flex
+         flex-col">
+
+  <h2
+    class="mb-5
+           text-xl
+           font-semibold
+           text-primary">
+
+    Growth Trends
+
+  </h2>
+  <p
+    class="mb-4
+         text-sm
+         text-secondary">
+
+    New tools added per month
+
+  </p>
+
+  @if (growthData().length > 0) {
+
+    <div
+      class="flex-1
+         min-h-0">
+
+      <canvas
+        baseChart
+        [data]="chartData()"
+        [options]="chartOptions"
+        [type]="'line'">
+      </canvas>
+
+    </div>
+
+  } @else {
+
+    <div
+      class="flex
+             h-[240px]
+             items-center
+             justify-center
+             text-secondary">
+
+      Loading...
+
+    </div>
+
+  }
+
+</section>

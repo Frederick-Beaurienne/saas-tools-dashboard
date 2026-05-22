@@ -3,7 +3,7 @@ import {LucideAngularModule, LucideIconData} from 'lucide-angular';
 import {AppIcons} from '../../../../shared/ui/icons';
 import {input} from '@angular/core';
 import {NgStyle} from '@angular/common';
-import {Tool} from '../../../../shared/models/tool.model';
+import {Tool} from '../../../../core/models/tool.model';
 
 @Component({
   selector: 'app-dashboard-kpi-card',

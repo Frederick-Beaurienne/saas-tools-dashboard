@@ -4,7 +4,7 @@
 
     <!-- Mobile menu button -->
     <button
-      class="icon-btn mr-4 md:hidden"
+      class="icon-btn mr-4 !hidden md:!hidden max-md:!flex"
       title="Navigation menu"
       (click)="toggleMobileMenu()">
 
@@ -65,7 +65,7 @@
           routerLink="/analytics"
           routerLinkActive="active">
 
-          AnalyticsService
+          Analytics
 
         </a>
 
@@ -232,7 +232,7 @@
         routerLinkActive="active"
         (click)="closeMobileMenu()">
 
-        AnalyticsService
+        Analytics
 
       </a>
 

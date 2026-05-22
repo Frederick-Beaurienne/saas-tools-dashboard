@@ -1,0 +1,57 @@
+<section
+  class="card
+         p-5
+         h-[360px]
+         flex
+         flex-col">
+
+  <h2
+    class="mb-5
+           text-xl
+           font-semibold
+           text-primary">
+
+    Department Activity
+
+  </h2>
+
+  <p
+    class="mb-5
+         text-sm
+         text-secondary">
+
+    Weighted tool adoption by department
+
+  </p>
+
+  @if (departmentData().length > 0) {
+
+    <div
+      class="flex-1
+         min-h-0">
+
+      <canvas
+        baseChart
+        [data]="chartData()"
+        [options]="chartOptions"
+        [type]="'bar'">
+      </canvas>
+
+    </div>
+
+  } @else {
+
+    <div
+      class="flex
+             h-[240px]
+             items-center
+             justify-center
+             text-secondary">
+
+      Loading...
+
+    </div>
+
+  }
+
+</section>

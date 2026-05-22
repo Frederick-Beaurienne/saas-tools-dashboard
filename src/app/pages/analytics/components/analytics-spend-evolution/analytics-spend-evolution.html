@@ -1,0 +1,46 @@
+<section
+  class="card
+         p-5
+         h-[360px]
+         flex
+         flex-col">
+  <h3
+    class="text-lg
+         font-semibold
+         tracking-tight
+         text-primary">
+
+    Monthly Spend Evolution
+
+  </h3>
+
+  <div
+    class="flex-1
+         min-h-0">
+
+    @if (spendData()) {
+
+      <canvas
+        baseChart
+        [data]="chartData()"
+        [options]="chartOptions"
+        [type]="'line'">
+      </canvas>
+
+    } @else {
+
+      <div
+        class="h-full
+             flex
+             items-center
+             justify-center
+             text-secondary">
+
+        Loading chart...
+
+      </div>
+
+    }
+
+  </div>
+</section>

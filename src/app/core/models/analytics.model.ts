@@ -20,7 +20,7 @@ export interface CostAnalytics {
   total_users: number;
 }
 
-export interface Analytics {
+export interface AnalyticsModel {
   budget_overview: BudgetOverview;
   kpi_trends: KpiTrends;
   cost_analytics: CostAnalytics;

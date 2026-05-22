@@ -8,29 +8,31 @@ Built as part of a progressive 3-day frontend technical challenge.
 
 # Table of Contents
 
+# Table of Contents
+
 - [Features](#features)
+- [🚀 Quick Start](#-quick-start)
 - [Tech Stack](#tech-stack)
-- [Project Architecture](#project-architecture)
-- [Prerequisites](#prerequisites)
-- [Clone Repository](#clone-repository)
-- [Install Dependencies](#install-dependencies)
-- [Run the Application](#run-the-application)
-- [Routing Strategy](#routing-strategy)
-- [Current Progress](#current-progress)
-- [Testing](#testing)
+- [🏗️ Architecture](#️-architecture)
+- [🔗 Navigation & User Journey](#-navigation--user-journey)
+- [📊 Data Integration Strategy](#-data-integration-strategy)
+- [📱 Progressive Responsive Design](#-progressive-responsive-design)
+- [Testing Strategy](#testing-strategy)
 - [Design Choices](#design-choices)
   - [Angular Standalone Components](#angular-standalone-components)
   - [Tailwind + SCSS Strategy](#tailwind--scss-strategy)
   - [Modular Layout Strategy](#modular-layout-strategy)
   - [Theme Token Strategy](#theme-token-strategy)
-  - [Shared Design System Strategy](#shared-design-system-strategy)
+  - [🎨 Design System Evolution](#-design-system-evolution)
   - [Reusable Modal Strategy](#reusable-modal-strategy)
   - [Catalogue Query Strategy](#catalogue-query-strategy)
   - [Form Validation Strategy](#form-validation-strategy)
-  - [Chart Library Choice](#chart-library-choice)
+  - [📈 Data Visualization Philosophy](#-data-visualization-philosophy)
+  - [⚡ Performance Optimizations](#-performance-optimizations)
+  - [🎯 Design Consistency Approach](#-design-consistency-approach)
   - [Progressive Delivery Strategy](#progressive-delivery-strategy)
   - [Mock Backend Timestamp Strategy](#mock-backend-timestamp-strategy)
-- [Future Improvements](#future-improvements)
+- [🔮 Next Steps / Complete App Vision](#-next-steps--complete-app-vision)
 - [Author](#author)
 
 ---
@@ -67,13 +69,26 @@ Implemented features:
 - Tool status management
 - Icon URL management with commit-based preview
 - Extended tool details modal
+- Analytics page
+- Monthly spend evolution
+- Department cost breakdown
+- Budget progress analytics
+- Top expensive tools
+- User adoption analytics
+- Most / least used tools
+- Department activity
+- Growth trends
+- Insights dashboard
+- Cost optimization alerts
+- Unused tools warnings
+- ROI calculations
+- Usage patterns
 
 Challenge progression:
 
 - Day 6 — Dashboard foundation
 - Day 7 — Tools management (core workflow implemented)
-- Day 8 — Analytics integration (planned)
-
+  Day 8 — Analytics page and insights dashboard
 ---
 
 # Tech Stack
@@ -95,7 +110,7 @@ Challenge progression:
 
 ---
 
-# Project Architecture
+# 🏗️ Architecture
 
 The project follows a modular frontend architecture.
 
@@ -141,6 +156,33 @@ The architecture intentionally separates:
 - reusable UI logic
 
 in order to preserve maintainability and progressive feature growth.
+
+The project intentionally separates three routed business areas:
+
+- Dashboard  
+  Operational overview and monitoring
+
+- Tools  
+  Catalogue and management workflows
+
+- Analytics  
+  Data visualization and business insights
+
+---
+
+# 🚀 Quick Start
+
+Install and launch in one command:
+
+```bash
+npm install && npm start
+```
+
+Application available at:
+
+```text
+http://localhost:4200
+```
 
 ---
 
@@ -194,7 +236,7 @@ npm run build
 
 ---
 
-# Routing Strategy
+# 🔗 Navigation & User Journey
 
 The application is designed around three primary routes:
 
@@ -214,6 +256,25 @@ This routing approach was chosen to:
 - support progressive feature delivery
 - simplify layout composition
 - prepare reusable shell-based layouts
+
+The application intentionally follows a complete user journey:
+
+```text
+Dashboard → Tools → Analytics
+```
+
+Typical flow:
+
+- Dashboard  
+  Monitor KPIs and recent activity
+
+- Tools  
+  Search, manage and edit catalogue items
+
+- Analytics  
+  Explore costs, adoption and optimization opportunities
+
+This routing strategy validates navigation consistency and business flow across all three challenge pages.
 
 ---
 
@@ -278,7 +339,7 @@ This routing approach was chosen to:
 
 ---
 
-# Testing
+# 🧪 Testing Strategy
 
 Run test suite:
 
@@ -314,6 +375,25 @@ This approach aims to:
 
 ---
 
+# 📊 Data Integration Strategy
+
+The application relies on JSON Server and Angular HttpClient.
+
+Data ownership remains backend-oriented whenever possible.
+
+Dashboard, Tools and Analytics pages consume dedicated services and progressively compose API responses into UI-oriented data.
+
+The tools catalogue intentionally combines:
+
+- global search (`q`)
+- server sorting (`_sort`, `_order`)
+- pagination (`_page`, `_limit`)
+- total count (`X-Total-Count`)
+
+Analytics combines multiple datasets simultaneously in order to derive business insights while avoiding duplicated logic.
+
+---
+
 # Design Choices
 
 ## Angular Standalone Components
@@ -328,6 +408,23 @@ This approach was chosen to:
 - align with modern Angular practices
 
 rather than relying on traditional NgModule-heavy structures.
+
+## 📱 Progressive Responsive Design
+
+Responsive behavior was progressively introduced during development rather than postponed.
+
+Each page adapts differently:
+
+- Dashboard  
+  KPI wrapping and responsive tables
+
+- Tools  
+  Scrollable catalogue and responsive modals
+
+- Analytics  
+  Adaptive charts and compressed insight cards
+
+The project follows a progressive responsive strategy focused on usability across screen sizes.
 
 ---
 
@@ -390,7 +487,7 @@ This approach preserves simplicity while remaining scalable for future evolution
 
 ---
 
-## Shared Design System Strategy
+## 🎨 Design System Evolution
 
 The challenge progressively removes visual guidance after Dashboard implementation.
 
@@ -404,6 +501,16 @@ This strategy aims to:
 - maintain coherent UX across pages
 
 Shared UI components will progressively become the primary styling layer.
+
+The design system progressively evolved during the 3-day challenge.
+
+Day 6 focused on layout and dashboard primitives.
+
+Day 7 expanded reusable CRUD and table systems.
+
+Day 8 extended these foundations into analytics and data visualization.
+
+This approach maintained UI consistency despite progressively reduced mockup guidance.
 
 ---
 
@@ -487,7 +594,7 @@ Validation logic is intentionally enforced both at UI level and at TypeScript su
 
 ---
 
-## Chart Library Choice
+## 📈 Data Visualization Philosophy
 
 Chart.js and ng2-charts were selected for analytics integration.
 
@@ -499,6 +606,43 @@ This choice was made to:
 - avoid unnecessary overhead introduced by lower-level libraries such as D3
 
 The analytics layer prioritizes coherent visualization over experimental chart rendering.
+
+Charts intentionally follow the design system through shared spacing, theme-aware colors and reusable card patterns.
+
+Visualization prioritizes readability and business meaning over experimental rendering.
+
+---
+
+## ⚡ Performance Optimizations
+
+Several optimizations were intentionally introduced:
+
+- Angular standalone components
+- Signal-driven rendering
+- Backend-owned catalogue queries
+- Reduced duplicated state
+- Controlled modal rendering
+- Commit-based preview interactions
+- Lightweight chart integration
+
+The project prioritizes predictable responsiveness and maintainable rendering behavior.
+
+---
+
+## 🎯 Design Consistency Approach
+
+The challenge progressively removed mockups after early phases.
+
+Consistency was therefore maintained through:
+
+- shared cards
+- reusable badges
+- centralized theme tokens
+- typography hierarchy
+- repeated spacing patterns
+- reusable visualization styles
+
+New pages evolved from validated UI primitives rather than independent redesigns.
 
 ---
 
@@ -514,6 +658,36 @@ Priority is intentionally given to:
 - demonstrable feature completion
 
 rather than partially implemented features or premature complexity.
+
+---
+
+## Scope & Prioritization Strategy
+
+The challenge intentionally exceeds what can reasonably be completed within the available timeframe.
+
+The project therefore follows a deliberate prioritization strategy.
+
+Priority was intentionally given to:
+
+- architectural coherence
+- reusable UI foundations
+- navigation consistency
+- shared design system evolution
+- stable CRUD and catalogue workflows
+- demonstrable end-to-end user interactions
+
+As a result, some lower-priority or differentiator features were intentionally deferred.
+
+Deferred or partially implemented areas currently include:
+
+- analytics page completion
+- bulk operations
+- advanced loading / skeleton states
+- extended automated testing
+- advanced catalogue presets
+- CI/CD and infrastructure refinements
+
+This prioritization was intentional and aimed to maximize delivery quality, maintainability and demonstrable feature completeness within the challenge timeframe rather than introducing partially implemented functionality.
 
 ---
 
@@ -538,8 +712,7 @@ Until backend timestamp persistence becomes reliable, the dashboard currently re
 
 ---
 
-# Future Improvements
-
+# 🔮 Next Steps / Complete App Vision
 Planned areas include:
 
 - Advanced catalogue filtering and presets
@@ -554,6 +727,16 @@ Planned areas include:
 - Performance optimization
 - CI/CD integration
 
+The current application represents the foundation of a larger SaaS tools governance platform.
+
+Future evolution may include:
+
+- approval workflows
+- license lifecycle monitoring
+- spend governance
+- automation workflows
+- multi-user collaboration
+- advanced analytics
 ---
 
 # Author

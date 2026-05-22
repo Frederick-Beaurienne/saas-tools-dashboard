@@ -1,0 +1,115 @@
+<section
+  class="card
+         p-5
+         h-auto
+         flex
+         flex-col">
+
+  <h2
+    class="text-lg
+           font-semibold
+           text-primary">
+
+    Unused Tools
+
+  </h2>
+
+  <p
+    class="mt-1
+           mb-3
+           text-sm
+           text-secondary">
+
+    Licenses with optimization potential
+
+  </p>
+
+  <div
+    class="space-y-2">
+
+    @for (
+      tool
+        of warnings();
+      track tool.id
+      ) {
+
+      <div
+        class="rounded-lg
+               border
+               px-3
+               py-2"
+        [style.border-color]="'var(--border-color)'"
+        [style.background]="'var(--surface-soft)'">
+
+        <div
+          class="flex
+                 items-center
+                 justify-between
+                 gap-2">
+
+          <div
+            class="min-w-0">
+
+            <div
+              class="flex
+           items-center
+           gap-2">
+
+              <span
+                class="rounded-full
+             px-2
+             py-0.5
+             text-[11px]
+             font-medium"
+                [class]="
+        getStatusClasses(
+          'warning'
+        )
+      ">
+
+                Warning
+
+              </span>
+
+              <span
+                class="truncate
+             text-sm
+             text-primary">
+
+                {{ tool.name }}
+
+              </span>
+
+            </div>
+
+            <p
+              class="mt-1
+           text-xs
+           text-secondary">
+
+              Unused status
+              ·
+              € {{ tool.monthly_cost }}/mo
+
+            </p>
+
+            <p
+              class="mt-1
+           text-xs
+           text-secondary">
+
+              Consider reviewing license allocation
+
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+</section>

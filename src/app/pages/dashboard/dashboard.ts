@@ -3,11 +3,11 @@ import {DashboardKpiCard}
   from './components/dashboard-kpi-card/dashboard-kpi-card';
 import {DashboardRecentTools} from './components/dashboard-recent-tools/dashboard-recent-tools';
 import {AnalyticsService} from '../../core/services/analytics/analytics.service';
-import {take} from 'rxjs';
-import {Analytics} from '../../core/models/analytics.model';
+import {forkJoin, take} from 'rxjs';
+import {AnalyticsModel} from '../../core/models/analytics.model';
 import {KpiCard} from '../../shared/models/kpi-card.model';
 import {AppIcons} from '../../shared/ui/icons';
-import {Tool} from '../../shared/models/tool.model';
+import {Tool} from '../../core/models/tool.model';
 import {ToolsService} from '../../core/services/tools/tools.service';
 
 @Component({
@@ -22,9 +22,10 @@ import {ToolsService} from '../../core/services/tools/tools.service';
 })
 export class Dashboard implements OnInit {
 
-  public analytics?: Analytics;
+  public analytics?: AnalyticsModel;
   kpis: KpiCard[] = [];
   recentTools: Tool[] = [];
+  allTools: Tool[] = [];
 
   constructor(
     private readonly analyticsService: AnalyticsService,
@@ -34,59 +35,98 @@ export class Dashboard implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadAnalytics();
+    this.loadDashboardData();
     this.loadRecentTools();
   }
 
 
   // ---------- LOADING ---------- //
-  loadAnalytics(): void {
+  loadDashboardData(): void {
 
-    this.analyticsService
-      .getDashboardAnalytics()
-      .pipe(take(1))
-      .subscribe(response => {
-        this.analytics = response;
+    forkJoin({
 
-        this.kpis = [
-          {
-            title: 'Monthly Budget',
-            value: `€${(response.budget_overview.current_month_total / 1000).toFixed(1)}k`,
-            secondaryValue: `/ €${(response.budget_overview.monthly_limit / 1000).toFixed(0)}k`,
-            trend: response.kpi_trends.budget_change,
-            icon: AppIcons.TrendingUp,
-            accentFrom: '#14b8a6',
-            accentTo: '#34d399',
-          },
-          {
-            title: 'Active Tools',
-            value: '147',
-            trend: response.kpi_trends.tools_change,
-            icon: AppIcons.Wrench,
-            accentFrom: '#6366f1',
-            accentTo: '#a855f7',
-          },
-          {
-            title: 'Departments',
-            value: '12',
-            trend: response.kpi_trends.departments_change,
-            icon: AppIcons.Building2,
-            accentFrom: '#f97316',
-            accentTo: '#ec4899',
-          },
-          {
-            title: 'Cost/User',
-            value: `€${response.cost_analytics.cost_per_user}`,
-            trend: response.kpi_trends.cost_per_user_change,
-            icon: AppIcons.Users,
-            accentFrom: '#ec4899',
-            accentTo: '#f43f5e',
-          },
-        ];
+      analytics: this.analyticsService.getDashboardAnalytics(),
 
-        this.cdr.detectChanges();
+      tools: this.toolsService.getAllTools(),
+    })
+      .subscribe({
+
+        next: ({analytics, tools,}) => {
+
+          this.allTools = [...tools];
+          this.analytics = analytics;
+
+          this.kpis = [
+
+            {
+              title: 'Monthly Budget',
+
+              value:
+                `€${(
+                  analytics
+                    .budget_overview
+                    .current_month_total
+                  / 1000
+                ).toFixed(1)}k`,
+
+              secondaryValue:
+                `/ €${(
+                  analytics
+                    .budget_overview
+                    .monthly_limit
+                  / 1000
+                ).toFixed(0)}k`,
+
+              trend: analytics.kpi_trends.budget_change,
+              icon: AppIcons.TrendingUp,
+              accentFrom: '#14b8a6',
+              accentTo: '#2dd4bf',
+            },
+
+            {
+              title:
+                'Active Tools',
+
+              value:
+                tools
+                  .filter(tool => tool.status === 'active',)
+                  .length
+                  .toString(),
+
+              trend: analytics.kpi_trends.tools_change,
+              icon: AppIcons.Wrench,
+              accentFrom: '#7c3aed',
+              accentTo: '#8b5cf6',
+            },
+
+            {
+              title: 'Departments',
+
+              value: new Set(tools.map(tool => tool.owner_department,),)
+                .size
+                .toString(),
+
+              trend: analytics.kpi_trends.departments_change,
+              icon: AppIcons.Building2,
+              accentFrom: '#f97316',
+              accentTo: '#fb7185',
+            },
+
+            {
+              title: 'Cost/User',
+              value: `€${analytics.cost_analytics.cost_per_user}`,
+              trend: analytics.kpi_trends.cost_per_user_change,
+              icon: AppIcons.Users,
+              accentFrom: '#ec4899',
+              accentTo: '#f43f5e',
+            },
+          ];
+
+        },
+
+        error:
+          error => console.error('Dashboard loading failed', error,),
       });
-
   }
 
   loadRecentTools(): void {

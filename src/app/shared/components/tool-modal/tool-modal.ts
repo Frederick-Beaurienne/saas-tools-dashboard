@@ -19,7 +19,7 @@ import {LucideAngularModule} from 'lucide-angular';
 import {ToolsService} from '../../../core/services/tools/tools.service';
 import {ToolModalMode} from './tool-modal.types';
 import {AppIcons} from '../../ui/icons';
-import {Tool} from '../../models/tool.model';
+import {Tool} from '../../../core/models/tool.model';
 import {NgSelectComponent} from '@ng-select/ng-select';
 
 @Component({

@@ -6,7 +6,7 @@ import {
 
 import {LucideAngularModule} from 'lucide-angular';
 
-import {Tool} from '../../shared/models/tool.model';
+import {Tool} from '../../core/models/tool.model';
 
 import {ToolsService} from '../../core/services/tools/tools.service';
 import {ToolModal} from '../../shared/components/tool-modal/tool-modal';

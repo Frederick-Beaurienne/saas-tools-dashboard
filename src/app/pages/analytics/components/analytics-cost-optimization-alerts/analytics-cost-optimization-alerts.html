@@ -1,0 +1,79 @@
+<section
+  class="card
+         p-5
+         h-auto
+         flex
+         flex-col">
+
+  <h2
+    class="text-lg
+           font-semibold
+           text-primary">
+
+    Cost Optimization
+
+  </h2>
+
+  <p
+    class="mt-1
+           mb-3
+           text-sm
+           text-secondary">
+
+    Cost alerts & savings opportunities
+
+  </p>
+
+  <div
+    class="space-y-2">
+
+    @for (
+      alert
+        of alerts();
+      track $index
+      ) {
+
+      <div
+        class="rounded-lg border px-3 py-2"
+        [style.border-color]="'var(--border-color)'"
+        [style.background]="'var(--surface-soft)'">
+
+        <div
+          class="flex
+           items-center
+           gap-2">
+
+          <span
+            class="rounded-full
+             px-2
+             py-0.5
+             text-[11px]
+             font-medium"
+            [class]="
+        getStatusClasses(
+          alert.type
+        )
+      ">
+
+            {{ alert.label }}
+
+          </span>
+
+          <span
+            class="text-sm
+             text-secondary
+             leading-snug">
+
+            {{ alert.message }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+</section>
