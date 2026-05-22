@@ -20,7 +20,11 @@ import {
   Zap,
   Plus,
   ChevronUp,
-  ChevronsUpDown
+  ChevronsUpDown,
+  ChevronRight,
+  ChevronLeft,
+  ChevronsLeft,
+  ChevronsRight
 } from 'lucide-angular';
 
 export const AppIcons = {
@@ -45,5 +49,9 @@ export const AppIcons = {
   Zap,
   Plus,
   ChevronUp,
-  ChevronsUpDown
+  ChevronsUpDown,
+  ChevronRight,
+  ChevronLeft,
+  ChevronsLeft,
+  ChevronsRight
 };

@@ -28,7 +28,7 @@ import {DatePipe} from '@angular/common';
 export class Tools {
 
   protected readonly AppIcons = AppIcons;
-
+  protected readonly Math = Math;
 
   private readonly toolsService = inject(ToolsService);
   private readonly route = inject(ActivatedRoute);
@@ -55,6 +55,15 @@ export class Tools {
       'asc'
     );
 
+  readonly page =
+    signal(1);
+
+  readonly pageSize =
+    signal(10);
+
+  readonly total =
+    signal(0);
+
   constructor() {
 
     this.route
@@ -78,14 +87,20 @@ export class Tools {
         search,
         this.sortField()
         ?? undefined,
-        this.sortOrder()
+        this.sortOrder(),
+        this.page(),
+        this.pageSize()
       )
       .subscribe({
 
         next: response => {
 
           this.tools.set(
-            response
+            response.data
+          );
+
+          this.total.set(
+            response.total
           );
 
         },
@@ -168,6 +183,8 @@ export class Tools {
         .get('search')
       ?? '';
 
+    this.page.set(1);
+
     this.loadTools(
       search
     );
@@ -217,4 +234,115 @@ export class Tools {
 
   }
 
+  pages(): number[] {
+
+    const count =
+      Math.ceil(
+        this.total()
+        / this.pageSize()
+      );
+
+    return Array.from(
+      {length: count},
+      (_, i) => i + 1
+    );
+
+  }
+
+  goToPage(
+    page: number
+  ): void {
+
+    if (
+      page
+      === this.page()
+    ) {
+
+      return;
+
+    }
+
+    this.page.set(
+      page
+    );
+
+    const search =
+      this.route
+        .snapshot
+        .queryParamMap
+        .get('search')
+      ?? '';
+
+    this.loadTools(
+      search
+    );
+
+  }
+
+  prevPage(): void {
+
+    if (
+      this.page()
+      <= 1
+    ) {
+
+      return;
+
+    }
+
+    this.goToPage(
+      this.page() - 1
+    );
+
+  }
+
+  nextPage(): void {
+
+    if (
+      this.page()
+      >= this.pages().length
+    ) {
+
+      return;
+
+    }
+
+    this.goToPage(
+      this.page() + 1
+    );
+
+  }
+
+  firstPage(): void {
+
+    if (
+      this.page()
+      === 1
+    ) {
+
+      return;
+
+    }
+
+    this.goToPage(1);
+
+  }
+
+  lastPage(): void {
+
+    const last =
+      this.pages().length;
+
+    if (
+      this.page()
+      === last
+    ) {
+
+      return;
+
+    }
+
+    this.goToPage(last);
+
+  }
 }

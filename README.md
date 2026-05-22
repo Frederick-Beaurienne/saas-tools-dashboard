@@ -19,6 +19,17 @@ Built as part of a progressive 3-day frontend technical challenge.
 - [Current Progress](#current-progress)
 - [Testing](#testing)
 - [Design Choices](#design-choices)
+  - [Angular Standalone Components](#angular-standalone-components)
+  - [Tailwind + SCSS Strategy](#tailwind--scss-strategy)
+  - [Modular Layout Strategy](#modular-layout-strategy)
+  - [Theme Token Strategy](#theme-token-strategy)
+  - [Shared Design System Strategy](#shared-design-system-strategy)
+  - [Reusable Modal Strategy](#reusable-modal-strategy)
+  - [Catalogue Query Strategy](#catalogue-query-strategy)
+  - [Form Validation Strategy](#form-validation-strategy)
+  - [Chart Library Choice](#chart-library-choice)
+  - [Progressive Delivery Strategy](#progressive-delivery-strategy)
+  - [Mock Backend Timestamp Strategy](#mock-backend-timestamp-strategy)
 - [Future Improvements](#future-improvements)
 - [Author](#author)
 
@@ -49,6 +60,8 @@ Implemented features:
 - Global cross-page search
 - Multi-field search workflow
 - Table sorting workflow for Tools page
+- Backend-driven tools pagination
+- Unified search / sort / pagination workflow
 - Tools table responsive scrolling
 - Shared scrollbar UI system
 - Tool status management
@@ -243,6 +256,10 @@ This routing approach was chosen to:
 - Multi-column tools sorting
 - Search + sort API integration
 - Table sorting UX indicators
+- Backend pagination integration
+- Pagination UI and navigation controls
+- First / previous / next / last navigation
+- Unified catalogue query pipeline
 - Shared scrollbar system
 - Cross-page search navigation
 - Tools page implementation
@@ -417,20 +434,32 @@ This approach was chosen to:
 
 ---
 
-## Search and Sorting Strategy
+## Catalogue Query Strategy
 
-The tools catalogue intentionally combines multi-field search and server-driven sorting through a unified service pipeline.
+The tools catalogue intentionally combines global search, server-driven sorting and pagination through a single backend query pipeline.
 
-Rather than splitting search and sorting between frontend and backend logic, both interactions share the same API-driven workflow.
+Rather than splitting catalogue interactions between frontend filtering and backend ordering, all major catalogue controls rely on a unified API-driven strategy.
 
 This approach was chosen to:
 
 - preserve predictable data ordering
 - avoid duplicated client-side filtering logic
-- reduce state divergence between search and sorting
-- keep tools catalogue interactions scalable for future pagination and filtering
+- reduce state divergence between search, sorting and pagination
+- simplify catalogue state management
+- keep catalogue interactions scalable for future filtering features
+
+The backend natively supports:
+
+- global search (`q`)
+- server sorting (`_sort`, `_order`)
+- pagination (`_page`, `_limit`)
+- total count exposure (`X-Total-Count`)
+
+The frontend therefore acts primarily as an interaction layer while catalogue state and result ordering remain backend-owned.
 
 Sorting UX intentionally exposes neutral indicators on sortable columns while highlighting active ordering in order to improve discoverability without introducing excessive visual noise.
+
+Pagination follows the same interaction philosophy and intentionally resets after search or sorting changes in order to preserve predictable navigation behavior.
 
 ---
 
@@ -513,8 +542,7 @@ Until backend timestamp persistence becomes reliable, the dashboard currently re
 
 Planned areas include:
 
-- Advanced tools filtering
-- Pagination
+- Advanced catalogue filtering and presets
 - Bulk tool operations
 - Loading and skeleton states
 - Error-state UX refinement
