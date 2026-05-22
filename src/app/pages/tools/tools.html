@@ -78,36 +78,404 @@
 
         <tr>
 
-          <th class="w-[18%]">
-            Tool
+          <th
+            class="w-[18%] group
+           cursor-pointer
+           select-none
+           transition-colors
+           hover:text-primary"
+            (click)="toggleSort('name')">
+
+            <div
+              class="flex items-center gap-2">
+
+              <span>
+                Tool
+              </span>
+
+              <lucide-icon
+                [img]="
+    sortField()
+      !== 'name'
+      ? AppIcons.ChevronsUpDown
+      : sortOrder()
+        === 'asc'
+          ? AppIcons.ChevronUp
+          : AppIcons.ChevronDown
+  "
+                size="20"
+                class="
+  transition-all
+  duration-150
+"
+                [class.opacity-40]="
+  sortField()
+  !== 'name'
+"
+                [class.group-hover:opacity-70]="
+  sortField()
+  !== 'name'
+"
+                [class.text-primary]="
+  sortField()
+  === 'name'
+">
+              </lucide-icon>
+
+            </div>
+
           </th>
 
-          <th class="w-[18%]">
-            Vendor
+          <th
+            class="w-[18%] group
+           cursor-pointer
+           select-none
+           transition-colors
+           hover:text-primary"
+            (click)="toggleSort('vendor')">
+
+            <div
+              class="flex items-center gap-2">
+
+              <span>
+                Vendor
+              </span>
+
+              <lucide-icon
+                [img]="
+    sortField()
+      !== 'vendor'
+      ? AppIcons.ChevronsUpDown
+      : sortOrder()
+        === 'asc'
+          ? AppIcons.ChevronUp
+          : AppIcons.ChevronDown
+  "
+                size="20"
+                class="
+    transition-all
+    duration-150
+  "
+                [class.opacity-40]="
+    sortField()
+    !== 'vendor'
+  "
+                [class.group-hover:opacity-70]="
+    sortField()
+    !== 'vendor'
+  "
+                [class.text-primary]="
+    sortField()
+    === 'vendor'
+  ">
+              </lucide-icon>
+
+            </div>
+
           </th>
 
-          <th class="w-[14%]">
-            Category
+          <th
+            class="w-[14%] group
+           cursor-pointer
+           select-none
+           transition-colors
+           hover:text-primary"
+            (click)="toggleSort('category')">
+
+            <div
+              class="flex items-center gap-2">
+
+              <span>
+                Category
+              </span>
+
+              <lucide-icon
+                [img]="
+    sortField()
+      !== 'category'
+      ? AppIcons.ChevronsUpDown
+      : sortOrder()
+        === 'asc'
+          ? AppIcons.ChevronUp
+          : AppIcons.ChevronDown
+  "
+                size="20"
+                class="
+    transition-all
+    duration-150
+  "
+                [class.opacity-40]="
+    sortField()
+    !== 'category'
+  "
+                [class.group-hover:opacity-70]="
+    sortField()
+    !== 'category'
+  "
+                [class.text-primary]="
+    sortField()
+    === 'category'
+  ">
+              </lucide-icon>
+
+            </div>
+
           </th>
 
-          <th class="w-[18%]">
-            Department
+          <th
+            class="w-[18%] group
+           cursor-pointer
+           select-none
+           transition-colors
+           hover:text-primary"
+            (click)="
+      toggleSort(
+        'owner_department'
+      )
+    ">
+
+            <div
+              class="flex items-center gap-2">
+
+              <span>
+                Department
+              </span>
+
+              <lucide-icon
+                [img]="
+    sortField()
+      !== 'owner_department'
+      ? AppIcons.ChevronsUpDown
+      : sortOrder()
+        === 'asc'
+          ? AppIcons.ChevronUp
+          : AppIcons.ChevronDown
+  "
+                size="20"
+                class="
+    transition-all
+    duration-150
+  "
+                [class.opacity-40]="
+    sortField()
+    !== 'owner_department'
+  "
+                [class.group-hover:opacity-70]="
+    sortField()
+    !== 'owner_department'
+  "
+                [class.text-primary]="
+    sortField()
+    === 'owner_department'
+  ">
+              </lucide-icon>
+
+            </div>
+
           </th>
 
-          <th class="w-[10%]">
-            Users
+          <th
+            class="w-[10%] group
+           cursor-pointer
+           select-none
+           transition-colors
+           hover:text-primary"
+            (click)="
+      toggleSort(
+        'active_users_count'
+      )
+    ">
+
+            <div
+              class="flex items-center gap-2">
+
+              <span>
+                Users
+              </span>
+
+              <lucide-icon
+                [img]="
+    sortField()
+      !== 'active_users_count'
+      ? AppIcons.ChevronsUpDown
+      : sortOrder()
+        === 'asc'
+          ? AppIcons.ChevronUp
+          : AppIcons.ChevronDown
+  "
+                size="20"
+                class="
+    transition-all
+    duration-150
+  "
+                [class.opacity-40]="
+    sortField()
+    !== 'active_users_count'
+  "
+                [class.group-hover:opacity-70]="
+    sortField()
+    !== 'active_users_count'
+  "
+                [class.text-primary]="
+    sortField()
+    === 'active_users_count'
+  ">
+              </lucide-icon>
+
+            </div>
+
           </th>
 
-          <th class="w-[14%]">
-            Monthly Cost
+          <th
+            class="w-[14%] group
+           cursor-pointer
+           select-none
+           transition-colors
+           hover:text-primary"
+            (click)="
+      toggleSort(
+        'monthly_cost'
+      )
+    ">
+
+            <div
+              class="flex items-center gap-2">
+
+              <span>
+                Monthly Cost
+              </span>
+
+              <lucide-icon
+                [img]="
+    sortField()
+      !== 'monthly_cost'
+      ? AppIcons.ChevronsUpDown
+      : sortOrder()
+        === 'asc'
+          ? AppIcons.ChevronUp
+          : AppIcons.ChevronDown
+  "
+                size="20"
+                class="
+    transition-all
+    duration-150
+  "
+                [class.opacity-40]="
+    sortField()
+    !== 'monthly_cost'
+  "
+                [class.group-hover:opacity-70]="
+    sortField()
+    !== 'monthly_cost'
+  "
+                [class.text-primary]="
+    sortField()
+    === 'monthly_cost'
+  ">
+              </lucide-icon>
+
+            </div>
+
           </th>
 
-          <th class="w-[12%]">
-            Status
+          <th
+            class="w-[12%] group
+           cursor-pointer
+           select-none
+           transition-colors
+           hover:text-primary"
+            (click)="toggleSort('status')">
+
+            <div
+              class="flex items-center gap-2">
+
+              <span>
+                Status
+              </span>
+
+              <lucide-icon
+                [img]="
+    sortField()
+      !== 'status'
+      ? AppIcons.ChevronsUpDown
+      : sortOrder()
+        === 'asc'
+          ? AppIcons.ChevronUp
+          : AppIcons.ChevronDown
+  "
+                size="20"
+                class="
+    transition-all
+    duration-150
+  "
+                [class.opacity-40]="
+    sortField()
+    !== 'status'
+  "
+                [class.group-hover:opacity-70]="
+    sortField()
+    !== 'status'
+  "
+                [class.text-primary]="
+    sortField()
+    === 'status'
+  ">
+              </lucide-icon>
+
+            </div>
+
           </th>
 
-          <th class="w-[14%]">
-            Last Update
+          <th
+            class="w-[14%] group
+           cursor-pointer
+           select-none
+           transition-colors
+           hover:text-primary"
+            (click)="
+      toggleSort(
+        'updated_at'
+      )
+    ">
+
+            <div
+              class="flex items-center gap-2">
+
+              <span>
+                Last Update
+              </span>
+
+              <lucide-icon
+                [img]="
+    sortField()
+      !== 'updated_at'
+      ? AppIcons.ChevronsUpDown
+      : sortOrder()
+        === 'asc'
+          ? AppIcons.ChevronUp
+          : AppIcons.ChevronDown
+  "
+                size="20"
+                class="
+    transition-all
+    duration-150
+  "
+                [class.opacity-40]="
+    sortField()
+    !== 'updated_at'
+  "
+                [class.group-hover:opacity-70]="
+    sortField()
+    !== 'updated_at'
+  "
+                [class.text-primary]="
+    sortField()
+    === 'updated_at'
+  ">
+              </lucide-icon>
+
+            </div>
+
           </th>
 
         </tr>

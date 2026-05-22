@@ -48,6 +48,7 @@ Implemented features:
 - Tools catalog page
 - Global cross-page search
 - Multi-field search workflow
+- Table sorting workflow for Tools page
 - Tools table responsive scrolling
 - Shared scrollbar UI system
 - Tool status management
@@ -239,6 +240,9 @@ This routing approach was chosen to:
 - Query-param driven search routing
 - Multi-field search service
 - Responsive tools data table
+- Multi-column tools sorting
+- Search + sort API integration
+- Table sorting UX indicators
 - Shared scrollbar system
 - Cross-page search navigation
 - Tools page implementation
@@ -413,6 +417,23 @@ This approach was chosen to:
 
 ---
 
+## Search and Sorting Strategy
+
+The tools catalogue intentionally combines multi-field search and server-driven sorting through a unified service pipeline.
+
+Rather than splitting search and sorting between frontend and backend logic, both interactions share the same API-driven workflow.
+
+This approach was chosen to:
+
+- preserve predictable data ordering
+- avoid duplicated client-side filtering logic
+- reduce state divergence between search and sorting
+- keep tools catalogue interactions scalable for future pagination and filtering
+
+Sorting UX intentionally exposes neutral indicators on sortable columns while highlighting active ordering in order to improve discoverability without introducing excessive visual noise.
+
+---
+
 ## Form Validation Strategy
 
 The tools workflow introduces progressive form integrity validation.
@@ -493,7 +514,7 @@ Until backend timestamp persistence becomes reliable, the dashboard currently re
 Planned areas include:
 
 - Advanced tools filtering
-- Pagination and sorting
+- Pagination
 - Bulk tool operations
 - Loading and skeleton states
 - Error-state UX refinement

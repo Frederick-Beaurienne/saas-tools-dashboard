@@ -5,11 +5,9 @@ import {environment} from '../../../../environments/environment';
 import {ApiEndpoints} from '../../config/api-endpoints';
 
 import {Tool} from '../../../shared/models/tool.model';
-import {Observable, forkJoin} from 'rxjs';
+import {forkJoin, Observable} from 'rxjs';
 
-import {
-  map
-} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -46,19 +44,36 @@ export class ToolsService {
 
   }
 
-  getTools(search?: string): Observable<Tool[]> {
+  getTools(
+    search?: string,
+    sort?: string,
+    order: 'asc' | 'desc' = 'asc'
+  ): Observable<Tool[]> {
 
     if (search?.trim()) {
 
-      return this
-        .buildSearchRequest(
-          search.trim()
-        );
+      return this.buildSearchRequest(
+        search.trim(),
+        sort,
+        order
+      );
+
+    }
+
+    let params =
+      new HttpParams();
+
+    if (sort) {
+
+      params =
+        params
+          .set('_sort', sort)
+          .set('_order', order);
 
     }
 
     return this.http.get<Tool[]>(
-      `${environment.apiUrl}${ApiEndpoints.tools}`
+      `${environment.apiUrl}${ApiEndpoints.tools}`, {params}
     );
 
   }
@@ -101,7 +116,9 @@ export class ToolsService {
   // ---------- PRIVATE METHODS ---------- //
 
   private buildSearchRequest(
-    term: string
+    term: string,
+    sort?: string,
+    order: 'asc' | 'desc' = 'asc'
   ): Observable<Tool[]> {
 
     const url =
@@ -114,11 +131,12 @@ export class ToolsService {
           url,
           {
             params:
-              new HttpParams()
-                .set(
-                  'name_like',
-                  term
-                )
+              this.buildParams(
+                'name_like',
+                term,
+                sort,
+                order
+              )
           }
         ),
 
@@ -127,11 +145,12 @@ export class ToolsService {
           url,
           {
             params:
-              new HttpParams()
-                .set(
-                  'vendor_like',
-                  term
-                )
+              this.buildParams(
+                'vendor_like',
+                term,
+                sort,
+                order
+              )
           }
         ),
 
@@ -140,11 +159,12 @@ export class ToolsService {
           url,
           {
             params:
-              new HttpParams()
-                .set(
-                  'category_like',
-                  term
-                )
+              this.buildParams(
+                'category_like',
+                term,
+                sort,
+                order
+              )
           }
         ),
 
@@ -153,11 +173,12 @@ export class ToolsService {
           url,
           {
             params:
-              new HttpParams()
-                .set(
-                  'owner_department_like',
-                  term
-                )
+              this.buildParams(
+                'owner_department_like',
+                term,
+                sort,
+                order
+              )
           }
         ),
 
@@ -166,16 +187,16 @@ export class ToolsService {
           url,
           {
             params:
-              new HttpParams()
-                .set(
-                  'status_like',
-                  term
-                )
+              this.buildParams(
+                'status_like',
+                term,
+                sort,
+                order
+              )
           }
         )
 
     }).pipe(
-
       map(results => {
 
         const merged =
@@ -188,22 +209,36 @@ export class ToolsService {
           ];
 
         return merged.filter(
-          (
-            tool,
-            index,
-            self
-          ) =>
-            index ===
-            self.findIndex(
-              t =>
-                t.id ===
-                tool.id
-            )
+          (tool, index, self) =>
+            index === self.findIndex(t => t.id === tool.id)
         );
 
       })
-
     );
+
+  }
+
+  private buildParams(
+    field: string,
+    term: string,
+    sort?: string,
+    order: 'asc' | 'desc' = 'asc'
+  ): HttpParams {
+
+    let params =
+      new HttpParams()
+        .set(field, term);
+
+    if (sort) {
+
+      params =
+        params
+          .set('_sort', sort)
+          .set('_order', order);
+
+    }
+
+    return params;
 
   }
 }

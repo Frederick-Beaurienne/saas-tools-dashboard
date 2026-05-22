@@ -45,6 +45,16 @@ export class Tools {
   readonly isCreateMode =
     signal(false);
 
+  readonly sortField =
+    signal<string | null>(
+      null
+    );
+
+  readonly sortOrder =
+    signal<'asc' | 'desc'>(
+      'asc'
+    );
+
   constructor() {
 
     this.route
@@ -64,7 +74,12 @@ export class Tools {
   loadTools(search?: string): void {
 
     this.toolsService
-      .getTools(search)
+      .getTools(
+        search,
+        this.sortField()
+        ?? undefined,
+        this.sortOrder()
+      )
       .subscribe({
 
         next: response => {
@@ -116,6 +131,47 @@ export class Tools {
       ?? '';
 
     this.loadTools(search);
+  }
+
+  toggleSort(
+    field: string
+  ): void {
+
+    if (
+      this.sortField()
+      === field
+    ) {
+
+      this.sortOrder.set(
+        this.sortOrder()
+        === 'asc'
+          ? 'desc'
+          : 'asc'
+      );
+
+    } else {
+
+      this.sortField.set(
+        field
+      );
+
+      this.sortOrder.set(
+        'asc'
+      );
+
+    }
+
+    const search =
+      this.route
+        .snapshot
+        .queryParamMap
+        .get('search')
+      ?? '';
+
+    this.loadTools(
+      search
+    );
+
   }
 
   displayValue(

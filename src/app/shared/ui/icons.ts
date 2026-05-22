@@ -18,7 +18,9 @@ import {
   Wrench,
   X,
   Zap,
-  Plus
+  Plus,
+  ChevronUp,
+  ChevronsUpDown
 } from 'lucide-angular';
 
 export const AppIcons = {
@@ -41,5 +43,7 @@ export const AppIcons = {
   Wrench,
   X,
   Zap,
-  Plus
+  Plus,
+  ChevronUp,
+  ChevronsUpDown
 };
